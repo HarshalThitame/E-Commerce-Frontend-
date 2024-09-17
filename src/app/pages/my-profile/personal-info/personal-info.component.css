@@ -1,0 +1,48 @@
+.card-header {
+  background: #e3f2fd;
+  border-bottom: 2px solid #3700b3;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .rounded-circle {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-header {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1200px) {
+  .card-body {
+    padding: 20px;
+  }
+}

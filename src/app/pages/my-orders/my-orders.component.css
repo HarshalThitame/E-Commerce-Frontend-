@@ -1,0 +1,67 @@
+/* General Styles */
+.orders-page {
+  padding-top: 20px; /* Adjust based on your navbar height */
+}
+.btn{
+  border: none;
+}
+
+.sidebar {
+  position: relative;
+  height: 100vh; /* Full height sidebar */
+  overflow: auto; /* Scrollable sidebar if content overflows */
+}
+
+.list-group {
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.list-group-item {
+  cursor: pointer;
+  border: 0;
+  border-radius: 0;
+  padding: 10px 15px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.list-group-item.active {
+  background-color: #e3f2fd;
+  color: darkgray;
+  font-weight: bold;
+}
+
+/* Off-canvas Sidebar Styles */
+.offcanvas {
+  width: 250px; /* Adjust the width of the sidebar */
+}
+
+@media (min-width: 992px) {
+  .offcanvas {
+    display: none; /* Hide off-canvas sidebar on larger screens */
+  }
+
+  .sidebar {
+    display: block; /* Show sidebar on larger screens */
+  }
+}
+
+/* Responsive Styles for sidebar toggle button */
+@media (max-width: 991px) {
+  .btn-primary {
+    margin-bottom: 10px; /* Space between the toggle button and the top of the page */
+  }
+
+  .sidebar {
+    display: none; /* Hide sidebar on mobile */
+  }
+
+  .offcanvas {
+    display: block; /* Show off-canvas sidebar on mobile */
+  }
+
+  main {
+    padding-left: 0; /* Remove left padding for main content on mobile */
+  }
+}

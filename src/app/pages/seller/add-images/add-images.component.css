@@ -1,0 +1,28 @@
+/* product-image.component.css */
+.product-card {
+  border: none;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+img{
+  max-height: 600px;
+  object-fit: contain;
+}
+.product-card img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover img {
+  transform: scale(1.1);
+}
+
+.card-title {
+  color: #343a40;
+  font-weight: bold;
+}

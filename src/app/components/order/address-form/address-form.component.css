@@ -1,0 +1,33 @@
+form {
+  margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: 500;
+}
+
+input.form-control,
+textarea.form-control {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+  border-color: #2874f0;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: #2874f0;
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1a60d0;
+}

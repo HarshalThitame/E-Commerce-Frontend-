@@ -1,0 +1,40 @@
+<!-- Navbar content -->
+<nav class="navbar navbar-expand-lg px-4 custom-navbar">
+  <a class="navbar-brand" [routerLink]="['/']">
+    <img [src]="'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/Logo.png'" class="logo-image" alt="logo"/>
+  </a>
+
+  <!-- Navbar Toggler for small screens -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+    </ul>
+
+    <!-- Buttons for logged-in and logged-out users -->
+    <div class="navbar-buttons">
+      <button *ngIf="isLoggedIn" [routerLink]="['/user', userId]" mat-button class="m-2">Cart</button>
+      <button *ngIf="isLoggedIn" (click)="paginationService.setCurrentPage(1)" [routerLink]="['/user/my-orders', userId]" mat-button class="m-2">My Orders</button>
+      <button *ngIf="!isLoggedIn" [routerLink]="['/login']" mat-button class="m-2">Login</button>
+      <button *ngIf="!isLoggedIn" [routerLink]="['/register']" mat-button class="m-2">Register</button>
+      <button routerLink="/user/profile/my-profile/personal-info" *ngIf="isLoggedIn" mat-button class="m-2">
+        {{ login.getUser().firstName }}
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Add Categories Navbar below -->
+<app-categories-navbar></app-categories-navbar>

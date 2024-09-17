@@ -1,0 +1,381 @@
+<app-navbar></app-navbar>
+
+<div class="offers">
+  <!--  <img class="offers" ngSrc="https://img.freepik.com/free-vector/dream-office-banner-with-freelancer-workplace-top-view_107791-6078.jpg?t=st=1725533739~exp=1725537339~hmac=a546e7d8c953f56d12c4b0587b91e7b886b4c90502892b0db06081fa770aabd8&w=1380" alt="" height="1125" width="2000">-->
+</div>
+
+<!-- Main Container -->
+<div class="container-fluid">
+  <!-- Electronics Section -->
+  <mat-card class="mb-3 custom-card" appearance="raised">
+    <mat-card-header>
+      <mat-card-title>Best Of Electronics...</mat-card-title>
+      <button
+        mat-button
+        matTooltip="View All Electronics"
+        class="more-button"
+        *ngIf="combineAllProductofElectronicsAndisAvailable.length > 0"
+        [routerLink]="'user/allproducts/category/Electronics'">
+        View All
+      </button>
+    </mat-card-header>
+    <div class="container-fluid mt-1">
+      <div class="row">
+        <div class="col-12">
+          <div *ngIf="combineAllProductofElectronicsAndisAvailable.length > 0; else noProducts">
+            <div class="scrollable-container position-relative">
+              <button class="scroll-arrow left-arrow" (click)="scrollLeft1()">&#10094;</button>
+              <div class="d-flex overflow-auto scroll-container sc1 custom-product-row">
+                <div *ngFor="let product of combineAllProductofElectronicsAndisAvailable" class="product-col">
+                  <mat-card class="m-2 position-relative product-card">
+                    <!-- Wishlist Icon -->
+                    <button
+                      class="wishlist-icon"
+                      [ngClass]="{'added': product.isInWishlist}"
+                      (click)="toggleWishlist(product)">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                    <a [routerLink]="'user/product/' + product.id">
+                      <img
+                        [src]="product.images && product.images.length > 0
+                      ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + product.images[0].url
+                      : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+                        class="card-img img-fluid p-2"
+                        alt="{{ product.name }}">
+                      <mat-card-content>
+                        <h6 matTooltip={{product.name}} class="card-title truncate-multiline">{{ product.name }}</h6>
+                        <p>MRP :<span class="text-decoration-line-through"> {{ product.price | currency:'INR' }}</span></p>
+                        <p class="text-success">-{{ product.discount }}%
+                          ({{ (product.price) - (product.price - (product.price * (product.discount / 100))) |currency:'INR' }} Off)</p>
+                        <h6 class="product-price">{{ product.price - (product.price * (product.discount / 100)) | currency:'INR' }}</h6>
+                      </mat-card-content>
+                    </a>
+                    <mat-card-actions>
+                      <button *ngIf="!product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                              (click)="addToCart(product)">Add to Cart</button>
+                      <button *ngIf="product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                              [routerLink]="['/user', user.id]">Go To Cart</button>
+                      <button *ngIf="product.stockQuantity <= 2" class="btn btn-outline-danger disabled out-of-stock m-3">Out Of Stock</button>
+                    </mat-card-actions>
+                  </mat-card>
+                </div>
+              </div>
+              <button class="scroll-arrow right-arrow" (click)="scrollRight1()">&#10095;</button>
+            </div>
+          </div>
+          <ng-template #noProducts>
+            <div class="text-center">
+              <p>No products available in this category.</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="mb-3 custom-card r-product" appearance="raised">
+    <h6 class="text-start m-3 bold">Top Choice for Top Performance: Your Next Best-Selling Smartphone</h6>
+    <hr>
+    <div class="d-flex flex-column flex-md-row m-3">
+      <div class="r-img mb-3 mb-md-0">
+        <!-- Wishlist Icon -->
+        <button
+          class="wishlist-icon"
+          [ngClass]="{'added': randomMobile.isInWishlist}"
+          (click)="toggleWishlist(randomMobile)">
+          <i class="fa fa-heart"></i>
+        </button>
+        <img [routerLink]="'user/product/' + randomMobile.id"
+             [src]="randomMobile.images && randomMobile.images.length > 0
+                      ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + randomMobile.images[0].url
+                      : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+             class="card-img img-fluid p-2 r-mobile"
+             alt="{{ randomMobile.name }}">
+      </div>
+      <div class="r-desc flex-fill">
+        <div [routerLink]="'user/product/' + randomMobile.id">
+          <h6 matTooltip={{randomMobile.name}} class="card-title truncate-multiline">{{ randomMobile.name }}</h6>
+          <p>MRP :<span class="text-decoration-line-through"> {{ randomMobile.price | currency:'INR' }}</span></p>
+          <p class="text-success">-{{ randomMobile.discount }}%
+            ({{ (randomMobile.price) - (randomMobile.price - (randomMobile.price * (randomMobile.discount / 100))) |currency:'INR' }} Off)</p>
+          <h6 class="product-price">{{ randomMobile.price - (randomMobile.price * (randomMobile.discount / 100)) | currency:'INR' }}</h6>
+        </div>
+        <mat-card-actions>
+          <button *ngIf="!randomMobile.isAvailable.exists && randomMobile.stockQuantity > 2" class="glow-on-hover"
+                  (click)="addToCart(randomMobile)">Add to Cart
+          </button>
+          <button *ngIf="randomMobile.isAvailable.exists && randomMobile.stockQuantity > 2" class="glow-on-hover"
+                  [routerLink]="['/user', user.id]">Go To Cart
+          </button>
+          <button *ngIf="randomMobile.stockQuantity <= 2"
+                  class="btn btn-outline-danger disabled out-of-stock m-3">Out Of Stock
+          </button>
+        </mat-card-actions>
+      </div>
+      <div class="r-hl flex-fill mt-3 mt-md-0">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tbody>
+            <tr *ngFor="let highlight of randomMobile.productHighlights">
+              <td style="font-weight: bold">{{ highlight.name }}:</td>
+              <td>{{ highlight.description }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Fashion Section -->
+  <mat-card class="mb-3 custom-card" appearance="raised">
+    <mat-card-header>
+      <mat-card-title>Fashion...</mat-card-title>
+      <button
+        mat-button
+        matTooltip="View All Fashion"
+        class="more-button"
+        *ngIf="combineAllProductofFashionAndisAvailable.length > 0"
+        [routerLink]="'user/allproducts/category/Fashion'">
+        View All
+      </button>
+    </mat-card-header>
+    <div class="container-fluid mt-1">
+      <div class="row">
+        <div class="col-12">
+          <div *ngIf="combineAllProductofFashionAndisAvailable.length > 0; else noProducts">
+            <div class="scrollable-container position-relative">
+              <button class="scroll-arrow left-arrow" (click)="scrollLeft2()">&#10094;</button>
+              <div class="d-flex overflow-auto scroll-container sc2 custom-product-row">
+                <div *ngFor="let product of combineAllProductofFashionAndisAvailable" class="product-col">
+                  <mat-card class="m-2 position-relative product-card">
+                    <!-- Wishlist Icon -->
+                    <button
+                      class="wishlist-icon"
+                      [ngClass]="{'added': isProductInWishlist(product.id)}"
+                      (click)="toggleWishlist(product)">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                    <a [routerLink]="'user/product/' + product.id">
+                      <img
+                        [src]="product.images && product.images.length > 0
+                        ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + product.images[0].url
+                        : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+                        class="card-img img-fluid p-2"
+                        alt="{{ product.name }}">
+                      <mat-card-content>
+                        <h6 matTooltip={{product.name}} class="card-title truncate-multiline">{{ product.name }}</h6>
+                        <p>MRP :<span class="text-decoration-line-through"> {{ product.price | currency:'INR' }}</span></p>
+                        <p class="text-success">-{{ product.discount }}%
+                          ({{ (product.price) - (product.price - (product.price * (product.discount / 100))) | currency:'INR' }} Off)</p>
+                        <h6 class="product-price">{{ product.price - (product.price * (product.discount / 100)) | currency:'INR' }}</h6>
+                      </mat-card-content>
+                    </a>
+                    <mat-card-actions>
+                      <button *ngIf="!product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                              (click)="addToCart(product)">Add to Cart</button>
+                      <button *ngIf="product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                              [routerLink]="['/user/cart']">Go To Cart</button>
+                      <button *ngIf="product.stockQuantity <= 2" class="btn btn-outline-danger disabled out-of-stock m-3">Out Of Stock</button>
+                    </mat-card-actions>
+                  </mat-card>
+                </div>
+              </div>
+              <button class="scroll-arrow right-arrow" (click)="scrollRight2()">&#10095;</button>
+            </div>
+          </div>
+          <ng-template #noProducts>
+            <div class="text-center">
+              <p>No products available in this category.</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Mobile Phones Section -->
+  <mat-card class="mb-3 custom-card" appearance="raised">
+    <mat-card-header>
+      <mat-card-title>Mobile Phones...</mat-card-title>
+      <button
+        mat-button
+        matTooltip="View All Mobile Phones"
+        class="more-button"
+        *ngIf="combineAllProductofMobileAndisAvailable.length > 0"
+        [routerLink]="'user/allproducts/category/Phones & Tablets'">
+        View All
+      </button>
+    </mat-card-header>
+    <div class="container-fluid mt-1">
+      <div class="row">
+        <div class="col-12">
+          <div *ngIf="combineAllProductofMobileAndisAvailable.length > 0; else noProducts">
+            <div class="scrollable-container position-relative">
+              <button class="scroll-arrow left-arrow" (click)="scrollLeft3()">&#10094;</button>
+              <div class="d-flex overflow-auto scroll-container sc3 custom-product-row">
+                <div *ngFor="let product of combineAllProductofMobileAndisAvailable" class="product-col">
+                  <mat-card class="m-2 position-relative product-card">
+                    <!-- Wishlist Icon -->
+                    <button
+                      class="wishlist-icon"
+                      [ngClass]="{'added': isProductInWishlist(product.id)}"
+                      (click)="toggleWishlist(product)">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                    <a [routerLink]="'user/product/' + product.id">
+                      <img
+                        [src]="product.images && product.images.length > 0
+                        ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + product.images[0].url
+                        : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+                        class="card-img img-fluid p-2"
+                        alt="{{ product.name }}">
+                      <mat-card-content>
+                        <h6 matTooltip={{product.name}} class="card-title truncate-multiline">{{ product.name }}</h6>
+                        <p>MRP :<span class="text-decoration-line-through"> {{ product.price | currency:'INR' }}</span></p>
+                        <p class="text-success">-{{ product.discount }}%
+                          ({{ (product.price) - (product.price - (product.price * (product.discount / 100))) | currency:'INR' }} Off)</p>
+                        <h6 class="product-price">{{ product.price - (product.price * (product.discount / 100)) | currency:'INR' }}</h6>
+                      </mat-card-content>
+                    </a>
+                    <mat-card-actions>
+                      <button *ngIf="!product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                              (click)="addToCart(product)">Add to Cart</button>
+                      <button *ngIf="product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                              [routerLink]="'/user/cart'">Go To Cart</button>
+                      <button *ngIf="product.stockQuantity <= 2" class="btn btn-outline-danger disabled out-of-stock m-3">Out Of Stock</button>
+                    </mat-card-actions>
+                  </mat-card>
+                </div>
+              </div>
+              <button class="scroll-arrow right-arrow" (click)="scrollRight3()">&#10095;</button>
+            </div>
+          </div>
+          <ng-template #noProducts>
+            <div class="text-center">
+              <p>No products available in this category.</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+
+  <mat-card class="mb-3 custom-card r-product" appearance="raised">
+    <h6 class="text-start m-3 bold">Wardrobe Essentials: The Best-Selling Fashion Items of the Year</h6>
+    <hr>
+    <div class="d-flex flex-column flex-md-row m-3">
+      <div class="r-img mb-3 mb-md-0">
+        <!-- Wishlist Icon -->
+        <button
+          class="wishlist-icon"
+          [ngClass]="{'added': randomFashion.isInWishlist}"
+          (click)="toggleWishlist(randomFashion)">
+          <i class="fa fa-heart"></i>
+        </button>
+        <img [routerLink]="'user/product/' + randomFashion.id"
+             [src]="randomFashion.images && randomFashion.images.length > 0
+                    ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + randomFashion.images[0].url
+                    : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+             class="card-img img-fluid p-2 r-mobile"
+             alt="{{ randomFashion.name }}">
+      </div>
+      <div class="r-desc flex-fill">
+        <div [routerLink]="'user/product/' + randomFashion.id">
+          <h6 matTooltip={{randomFashion.name}} class="card-title truncate-multiline">{{ randomFashion.name }}</h6>
+          <p>MRP :<span class="text-decoration-line-through"> {{ randomFashion.price | currency:'INR' }}</span></p>
+          <p class="text-success">-{{ randomFashion.discount }}%
+            ({{ (randomFashion.price) - (randomFashion.price - (randomFashion.price * (randomFashion.discount / 100))) |currency:'INR' }} Off)</p>
+          <h6 class="product-price">{{ randomFashion.price - (randomFashion.price * (randomFashion.discount / 100)) | currency:'INR' }}</h6>
+        </div>
+        <mat-card-actions>
+          <button *ngIf="!randomFashion.isAvailable.exists && randomFashion.stockQuantity > 2" class="glow-on-hover"
+                  (click)="addToCart(randomFashion)">Add to Cart
+          </button>
+          <button *ngIf="randomFashion.isAvailable.exists && randomFashion.stockQuantity > 2" class="glow-on-hover"
+                  [routerLink]="['/user', user.id]">Go To Cart
+          </button>
+          <button *ngIf="randomFashion.stockQuantity <= 2"
+                  class="btn btn-outline-danger disabled out-of-stock m-3">Out Of Stock
+          </button>
+        </mat-card-actions>
+      </div>
+      <div class="r-hl flex-fill mt-3 mt-md-0">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tbody>
+            <tr *ngFor="let highlight of randomFashion.productHighlights">
+              <td style="font-weight: bold">{{ highlight.name }}:</td>
+              <td>{{ highlight.description }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Suggestions Section -->
+  <mat-card class="mb-3 custom-card" appearance="raised">
+    <mat-card-header>
+      <mat-card-title>Suggestions</mat-card-title>
+    </mat-card-header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div *ngIf="allProducts.length > 0; else noProducts">
+            <div class="suggestion-container position-relative">
+              <div class="d-flex d-suggestion overflow-auto scroll-container">
+                <div *ngFor="let product of allProducts" class="col-12 col-sm-2 col-md-2 product-col-sug"> <!-- Adjusted columns -->
+                  <mat-card class="m-2 product-card">
+                    <!-- Wishlist Icon -->
+                    <button
+                      class="wishlist-icon"
+                      [ngClass]="{'added': product.isInWishlist}"
+                      (click)="toggleWishlist(product)">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                    <a [routerLink]="'user/product/' + product.id">
+                      <img
+                        [src]="product.images && product.images.length > 0
+                        ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + product.images[0].url
+                        : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+                        class="card-img img-fluid p-2"
+                        alt="{{ product.name }}">
+                      <mat-card-content>
+                        <h6 matTooltip={{product.name}} class="card-title truncate-multiline">{{ product.name }}</h6>
+                        <p>MRP :<span class="text-decoration-line-through"> {{ product.price | currency:'INR' }}</span>
+                        </p>
+                        <p class="text-success">-{{ product.discount }}%
+                          ({{ (product.price) - (product.price - (product.price * (product.discount / 100))) |currency:'INR' }}
+                          Off)</p>
+                        <h6 class="product-price">{{ product.price - (product.price * (product.discount / 100)) | currency:'INR' }}</h6>
+                      </mat-card-content>
+                    </a>
+                    <mat-card-actions>
+                      <button *ngIf="!product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                              (click)="addToCart(product)">Add to Cart
+                      </button>
+                      <button *ngIf="product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                              [routerLink]="['/user', user.id]">Go To Cart
+                      </button>
+                      <button *ngIf="product.stockQuantity <= 2"
+                              class="btn btn-outline-danger disabled out-of-stock m-3">Out Of Stock
+                      </button>
+                    </mat-card-actions>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #noProducts>
+            <div class="text-center">
+              <p>No products available in this category.</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row p-5">
+    <div class="col-md-9">
+      <div class="dialog-container">
+        <img [src]="data.images[currentImageIndex]" alt="Product Image" class="dialog-image">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="thumbnail-images">
+        <img
+          *ngFor="let image of data.images; let i = index"
+          [src]="image"
+          alt="Thumbnail Image"
+          class="thumbnail-image"
+          [class.selected-thumbnail]="i === currentImageIndex"
+        (click)="selectImage(i)"
+        >
+      </div>
+    </div>
+  </div>
+</div>

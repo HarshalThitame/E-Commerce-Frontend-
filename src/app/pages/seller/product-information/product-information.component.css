@@ -1,0 +1,197 @@
+img{
+  object-fit: contain !important;
+}
+.seller-dashboard-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.seller-content {
+  display: flex;
+  flex:1;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  flex: 1; /* Take up all remaining space */
+}
+
+.product-overview {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.product-price {
+  font-size: 24px;
+  color: #e91e63;
+  margin: 10px 0;
+}
+
+.product-stock {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn.primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn.secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #555;
+}
+
+.card p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.detailed-metrics {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ratings-reviews {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0;
+}
+.detailed-metrics {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+  width: 100% !important; /* Ensure canvas takes full width */
+  height: 400px; /* Adjust height as needed */
+}
+static-star {
+  color: #ffce00;
+  font-size: 18px;
+}
+.product-images-gallery {
+  margin-top: 20px;
+}
+
+.product-images-gallery h3 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gallery-item {
+  width: calc(25% - 10px); /* Adjust the width based on the number of columns you want */
+  margin-bottom: 10px;
+}
+
+.gallery-image {
+  width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.glow-on-hover{
+  width: 100% !important;
+}
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #e91e63;
+  border: none;
+  color: white;
+  font-size: 16px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.delete-btn:hover {
+  background-color: #c2185b;
+}
+/* Add to your CSS file */
+.btn.discount {
+  background-color: #f44336; /* Example: red background for discount button */
+  color: white;
+  border: none;
+}
+
+.btn.discount:hover {
+  background-color: #c62828; /* Darker shade on hover */
+}
+
+.static-star {
+  color: #ffce00;
+  font-size: 18px;
+}

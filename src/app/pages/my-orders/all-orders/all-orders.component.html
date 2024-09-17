@@ -1,0 +1,71 @@
+<div class="orders-header d-flex flex-column flex-md-row justify-content-between align-items-start m-2">
+  <h4>My Orders
+    <i style="font-size: 15px;" class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="You may use the numeric keypad to navigate through pages or jump directly to a specific page."></i>
+  </h4>
+  <div class="search-bar mt-3 mt-md-0">
+    <input type="text" class="form-control" placeholder="Search your orders">
+  </div>
+</div>
+
+<div *ngIf="orderItems.length == 0" class="empty-orders text-center">
+  <img [src]="'https://img.freepik.com/free-vector/empty-concept-illustration_114360-1188.jpg?t=st=1725733327~exp=1725736927~hmac=4c66056b0672275929762a2ff167579e069b4e9afa40965a8f5b2f8f23748632&w=740'" alt="No Orders" class="img-fluid mt-4 no-orders">
+  <p class="mt-3">You have no orders yet!</p>
+</div>
+
+<div class="orders-list mt-4">
+  <div *ngFor="let item of orderItems | paginate: { itemsPerPage: 10, currentPage: p }" class="order-card mb-4 p-3 border rounded">
+    <div class="d-flex flex-column flex-md-row justify-content-between">
+      <div class="order-details mb-3 mb-md-0">
+        <p>ORDER ID: {{ item.order.id }}</p>
+        <p>Placed on: {{ item.createdAt | date: 'dd MMM, yyyy' }}</p>
+        <p>Total: {{ item.price * item.quantity | currency:'INR' }}</p>
+        <p *ngIf="item.order.status != 'CANCELLED'" class="text-success">{{ item.order.status }}</p>
+        <p *ngIf="item.order.status == 'CANCELLED'" class="text-danger">
+          {{ item.order.status }}
+          <br>Your order for this product has been cancelled. To purchase it again, simply add it to your cart and place a new order.
+        </p>
+      </div>
+
+
+
+    </div>
+    <div class="d-flex flex-column flex-md-row mt-3">
+      <img [src]="item.product.images && item.product.images.length > 0 ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + item.product.images[0].url : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'" alt="{{ item.product.name }}" class="product-image mb-3 mb-md-0">
+
+      <a [routerLink]="'/user/product/'+item.product.id" class="ml-md-3">
+        <div>
+          <p><strong>{{ item.product.name }}</strong><br>{{ item.price | currency:'INR' }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Seller: {{ item.product.seller.businessName }}</p>
+          <p *ngIf="item.order.status == 'DELIVERED'">
+            Returnable until: {{ returnableDate(item) | date: 'dd MMM, yyyy' }}
+          </p>
+        </div>
+      </a>
+    </div>
+    <div class="order-status text-right">
+      <button mat-button class="mb-2" [routerLink]="['/user/my-orders/order-information/'+item.id]">
+        <mat-icon svgIcon="track_order"></mat-icon>
+        <span>Track Order</span>
+      </button>
+      <button *ngIf="item.order.status == 'CANCELLED'" mat-button color="primary" class="mb-2" (click)="addToCart(item.product)">
+        <mat-icon svgIcon="add_to_cart"></mat-icon>
+        <span>Add to Cart</span>
+      </button>
+      <button *ngIf="item.order.status != 'CANCELLED' && item.order.status != 'DELIVERED'" mat-button color="warn" class="mb-2" (click)="cancelOrder(item)">
+        <mat-icon svgIcon="cancel_order"></mat-icon>
+        <span>Cancel Order</span>
+      </button>
+      <button *ngIf="item.order.status == 'DELIVERED'" mat-button color="warn" (click)="returnOrder(item)">
+        <mat-icon svgIcon="return_order"></mat-icon>
+        <span>Return</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="orderItems.length > 0" class="row mt-4">
+    <div class="col-12 d-flex justify-content-end">
+      <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    </div>
+  </div>
+</div>

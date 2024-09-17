@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html #content lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Details</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
+<div style="width: 100%; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 20px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+  <!-- Header -->
+  <div style="text-align: center; padding: 10px 0; background-color: #007bff; color: #ffffff;">
+    <h1 style="margin: 0;">Order Details</h1>
+  </div>
+
+  <!-- Order Items Section -->
+  <h2 style="color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px;">Order Items</h2>
+  <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+    <thead>
+    <tr>
+      <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: left;">Image</th>
+      <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: left;">Product Name</th>
+      <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: left;">Qty</th>
+      <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: left;">Price</th>
+      <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: left;">Total</th>
+      <th style="padding: 10px; border: 1px solid #ddd; background-color: #f4f4f4; text-align: left;">Discount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Example item, repeat as needed -->
+    <tr  *ngFor="let item of orderItems">
+      <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">
+        <img [src]="item.product.mainIamge" alt="{{ item.product.name }}" style="max-width: 100px; height: auto; border-radius: 4px;">
+      </td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ item.product.name }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{item.quantity}}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ calculateDiscountedPrice(item.product.price, item.product.discount)  | currency:'INR' }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ calculateDiscountedPrice(item.product.price, item.product.discount) * item.quantity | currency:'INR' }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">-{{ item.product.discount }} %</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Shipping Address Section -->
+  <h2 style="color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px;">Shipping Address</h2>
+  <ul style="padding: 0; list-style: none; margin: 0;">
+    <li style="padding: 5px 0;"><strong>Name:</strong> {{ shippingAddress.firstName }}</li>
+    <li style="padding: 5px 0;"><strong>Address:</strong> {{ shippingAddress.addressLine1 }}, {{ shippingAddress.addressLine2 }}</li>
+    <li style="padding: 5px 0;"><strong>City:</strong> {{ shippingAddress.city }}</li>
+    <li style="padding: 5px 0;"><strong>State:</strong> {{ shippingAddress.state }}</li>
+    <li style="padding: 5px 0;"><strong>ZIP Code:</strong> {{ shippingAddress.zipCode }}</li>
+    <li style="padding: 5px 0;"><strong>Country:</strong> {{ shippingAddress.country }}</li>
+  </ul>
+
+  <!-- Payment Section -->
+<!--  <h2 style="color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px;">Payment Details</h2>-->
+<!--  <ul style="padding: 0; list-style: none; margin: 0;">-->
+<!--    <li style="padding: 5px 0;"><strong>Amount:</strong> {{ payment.amount }}</li>-->
+<!--    <li style="padding: 5px 0;"><strong>Payment Method:</strong> {{ payment.paymentMethod }}</li>-->
+<!--    <li style="padding: 5px 0;"><strong>Payment Status:</strong> {{ payment.paymentStatus }}</li>-->
+<!--  </ul>-->
+
+  <!-- Footer -->
+  <div style="text-align: center; padding: 10px 0; background-color: #f4f4f4; color: #777; font-size: 12px;">
+    <p style="margin: 0;">Thank you for your order!</p>
+  </div>
+</div>
+</body>
+</html>

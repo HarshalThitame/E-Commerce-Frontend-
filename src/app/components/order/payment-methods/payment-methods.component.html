@@ -1,0 +1,111 @@
+<h4 class="card-title">Payment Methods</h4>
+<form (ngSubmit)="onSubmit(paymentForm)" #paymentForm="ngForm">
+  <div class="form-group">
+    <label for="payment-method">Select Payment Method</label>
+    <select
+      id="payment-method"
+      class="form-control"
+      [(ngModel)]="selectedMethod"
+      name="paymentMethod"
+      required
+      #paymentMethod="ngModel"
+    >
+      <option value="" disabled>Select Payment Method</option>
+      <option value="credit-card">Credit Card</option>
+      <option value="debit-card">Debit Card</option>
+      <option value="upi">UPI</option>
+    </select>
+    <div *ngIf="paymentMethod.invalid && paymentMethod.touched" class="text-danger">
+      Payment method is required.
+    </div>
+  </div>
+
+  <!-- Credit/Debit Card Form -->
+  <div *ngIf="selectedMethod === 'credit-card' || selectedMethod === 'debit-card'">
+    <div class="form-group">
+      <label for="card-number">Card Number</label>
+      <input
+        type="text"
+        id="card-number"
+        class="form-control"
+        [(ngModel)]="paymentDetails.cardNumber"
+        name="cardNumber"
+        required
+        minlength="13"
+        maxlength="19"
+        pattern="^[0-9]*$"
+        #cardNumber="ngModel"
+      />
+      <div *ngIf="cardNumber.invalid && cardNumber.touched" class="text-danger">
+        <div *ngIf="cardNumber.errors?.['required']">Card number is required.</div>
+        <div *ngIf="cardNumber.errors?.['pattern']">Card number must be numeric.</div>
+        <div *ngIf="cardNumber.errors?.['minlength']">Card number must be at least 13 digits long.</div>
+        <div *ngIf="cardNumber.errors?.['maxlength']">Card number cannot exceed 19 digits.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="expiry-date">Expiry Date</label>
+      <input
+        type="text"
+        id="expiry-date"
+        class="form-control"
+        [(ngModel)]="paymentDetails.expiryDate"
+        name="expiryDate"
+        required
+        pattern="(0[1-9]|1[0-2])/[0-9]{2}"
+        placeholder="MM/YY"
+        #expiryDate="ngModel"
+      />
+      <div *ngIf="expiryDate.invalid && expiryDate.touched" class="text-danger">
+        <div *ngIf="expiryDate.errors?.['required']">Expiry date is required.</div>
+        <div *ngIf="expiryDate.errors?.['pattern']">Enter a valid expiry date (MM/YY).</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cvv">CVV</label>
+      <input
+        type="password"
+        id="cvv"
+        class="form-control"
+        [(ngModel)]="paymentDetails.cvv"
+        name="cvv"
+        required
+        minlength="3"
+        maxlength="4"
+        pattern="^[0-9]*$"
+        #cvv="ngModel"
+      />
+      <div *ngIf="cvv.invalid && cvv.touched" class="text-danger">
+        <div *ngIf="cvv.errors?.['required']">CVV is required.</div>
+        <div *ngIf="cvv.errors?.['pattern']">CVV must be numeric.</div>
+        <div *ngIf="cvv.errors?.['minlength']">CVV must be at least 3 digits long.</div>
+        <div *ngIf="cvv.errors?.['maxlength']">CVV cannot exceed 4 digits.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPI Form -->
+  <div *ngIf="selectedMethod === 'upi'">
+    <div class="form-group">
+      <label for="upi-id">UPI ID</label>
+      <input
+        type="text"
+        id="upi-id"
+        class="form-control"
+        [(ngModel)]="paymentDetails.upiId"
+        name="upiId"
+        required
+        pattern="^[a-zA-Z0-9._@]+$"
+        placeholder="example@upi"
+        #upiId="ngModel"
+      />
+      <div *ngIf="upiId.invalid && upiId.touched" class="text-danger">
+        <div *ngIf="upiId.errors?.['required']">UPI ID is required.</div>
+        <div *ngIf="upiId.errors?.['pattern']">Enter a valid UPI ID.</div>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="selectedAddress == null" class="text-danger">Kindly choose your address before moving on to the payment process.</p>
+  <button *ngIf="selectedAddress" type="submit" class="btn btn-primary mt-3" [disabled]="paymentForm.invalid">Proceed to Payment</button>
+</form>

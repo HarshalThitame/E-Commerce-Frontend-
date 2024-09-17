@@ -1,0 +1,153 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-4 sticky-part">
+      <!-- First part content here -->
+      <div class="product-detail">
+        <div class="main-image-box">
+          <!-- Wishlist Icon -->
+          <button
+            class="wishlist-icon"
+            [ngClass]="{'added': product.isInWishlist}"
+            (click)="toggleWishlist()">
+            <i class="fa fa-heart"></i>
+          </button>
+          <img [src]="selectedImageUrl" alt="Product Image" class="main-image" (click)="openImageDialog()">
+        </div>
+        <div class="thumbnail-images">
+          <img
+            *ngFor="let image of productImages"
+            [src]="'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/'+image.url"
+            alt="Thumbnail Image"
+            class="thumbnail-image"
+            (click)="onImageHover('https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/'+image.url)">
+        </div>
+      </div>
+
+      <div class="row">
+        <mat-divider></mat-divider>
+        <div class="col d-flex justify-content-center m-4">
+          <button *ngIf="!isProductAvailable.exists" (click)="addToCart()" mat-raised-button color="primary"
+                  class="full-width-button">
+            <mat-icon>add_shopping_cart</mat-icon>
+            Add to Cart
+          </button>
+          <button *ngIf="isProductAvailable.exists" [routerLink]="['/user', user.id]" mat-raised-button color="warn"
+                  class="full-width-button">
+            <mat-icon>add_shopping_cart</mat-icon>
+            Go to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-8 scrollable-part">
+      <!-- Second part content here -->
+      <div class="content">
+        <h2>{{ product.name }}</h2>
+
+        <div *ngIf="ratingAndReview.length>0" class="rating">
+          <!-- Full Stars -->
+          <i class="fa fa-star static-star" *ngFor="let star of getStars(ratingAndReview.averageRating)"></i>
+
+          <!-- Half Star -->
+          <i class="fa fa-star-half-alt static-star" *ngIf="getHalfStar(ratingAndReview.averageRating)"></i>
+
+          <!-- Average Rating and Total Reviews -->
+          <span class="average-rating">{{ ratingAndReview.averageRating || 0 }}/5</span>
+          <span class="total-reviews">({{ ratingAndReview.length || 0 }} reviews)</span>
+        </div>
+        <h6 class="text-success">Special price</h6>
+        <p class="text-success"> {{ product.price | currency:'INR' }}</p>
+
+        <p>Description</p>
+        <p>{{ product.description }}</p>
+        <hr>
+
+        <h6>Seller Details</h6>
+        <p>Name: {{ product.seller.businessName }}</p>
+        <p>Email: {{ product.seller.email }}</p>
+        <!-- Highlights Table -->
+        <div *ngIf="product.productHighlights.length > 0" class="table-responsive">
+          <hr>
+          <h6>Highlights</h6>
+          <table class="table">
+            <tbody>
+            <tr *ngFor="let highlight of product.productHighlights">
+              <td style="font-weight: bold">{{ highlight.name }}:</td>
+              <td>{{ highlight.description }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ratings and Reviews Section -->
+        <div *ngIf="ratingAndReview.length>0" class="rating">
+          <!-- Full Stars -->
+          <i class="fa fa-star static-star" *ngFor="let star of getStars(ratingAndReview.averageRating)"></i>
+
+          <!-- Half Star -->
+          <i class="fa fa-star-half-alt static-star" *ngIf="getHalfStar(ratingAndReview.averageRating)"></i>
+
+          <!-- Average Rating and Total Reviews -->
+          <span class="average-rating">{{ ratingAndReview.averageRating || 0 }}/5</span>
+          <span class="total-reviews">({{ ratingAndReview.length || 0 }} reviews)</span>
+        </div>
+
+        <!-- Display each review -->
+        <div class="review-card mt-3" *ngFor="let review of ratingAndReview">
+          <div class="review-header">
+            <strong>{{ review.user.firstName }} {{ review.user.lastName }}</strong>
+            <span class="review-date">{{ review.createdAt | date:'dd/MM/YYYY h:mm a' }}</span>
+
+          </div>
+          <div class="rating">
+            <i class="fa fa-star static-star" *ngFor="let star of getStars(review.rating)"></i>
+          </div>
+          <div class="review-body">
+            <p>{{ review.review }}</p>
+          </div>
+          <!-- Delete Review Button in the bottom right corner -->
+          <button class="btn btn-danger btn-sm delete-button m-2" (click)="deleteReview(review.id)">
+            <i class="fa fa-trash"></i> <!-- Font Awesome trash icon -->
+          </button>
+          <!-- Edit Review Button for the current user -->
+          <button *ngIf="review.user.id === user.id" class="btn btn-warning btn-sm edit-button m-2" (click)="editReview(review)">
+            <i class="fa fa-edit"></i> <!-- Font Awesome edit icon -->
+          </button>
+        </div>
+        <!-- Review Form -->
+        <div *ngIf="isEditing || !hasSubmittedReview" class="review-form mt-4">
+          <h5 *ngIf="hasSubmittedReview && !isEditing">Edit Your Review</h5>
+          <h5 *ngIf="!hasSubmittedReview && !isEditing">Submit a Review</h5>
+          <h5 *ngIf="isEditing">Edit Your Review</h5>
+
+          <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
+            <div class="form-group">
+              <label>Rating</label>
+              <div class="stars">
+                <i class="fa fa-star star"
+                   *ngFor="let star of getStar()"
+                   (click)="onStarClick(star)"
+                   [ngClass]="{'star-selected': star <= selectedRating}"
+                ></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="review">Review</label>
+              <textarea id="review" class="form-control" formControlName="review" rows="4"
+                        placeholder="Write your review here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary m-2" [disabled]="reviewForm.invalid">
+              {{ hasSubmittedReview ? 'Update Review' : 'Submit Review' }}
+            </button>
+            <!-- Cancel button to exit edit mode -->
+            <button type="button" class="btn btn-secondary m-2" (click)="cancelEdit()">
+              Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

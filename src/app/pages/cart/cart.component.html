@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <h2 class="mb-4">My Cart</h2>
+  <!-- Empty Cart Message -->
+  <div *ngIf="cartItems.length == 0" class="empty-cart d-flex flex-column align-items-center justify-content-center text-center">
+    <img src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" alt="Empty Cart" class="img-fluid mb-3">
+    <h4>Your cart is empty!</h4>
+    <p>It looks like you haven't added anything to your cart yet.</p>
+    <a href="/" class="btn btn-primary mt-3">Start Shopping</a>
+  </div>
+
+  <div *ngIf="cartItems.length > 0" class="row">
+    <!-- Cart Items Section -->
+    <div class="col-lg-8 col-sm-8">
+      <div class="card mb-3 shadow-lg" *ngFor="let item of cartItems">
+        <div class="row g-0">
+          <div class="col-md-3 col-sm-3">
+            <img
+              [src]="item.product.images && item.product.images.length > 0
+            ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + item.product.images[0].url
+            : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+              class="card-img-top product-image mt-2"
+              alt="{{ item.product.name }}">
+          </div>
+          <div class="col-md-9 col-sm-9">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a [href]="'user/product/' + item.product.id" [routerLink]="['/user/product', item.product.id]" class="h6">
+                  {{item.product.name}}
+              </a>
+              </h5>
+              <p>MRP :<span class="text-decoration-line-through"> {{item.product.price | currency:'INR'}}</span></p>
+              <p class="text-success">-{{item.product.discount}}% ({{(item.product.price)-(item.product.price - (item.product.price * (item.product.discount/100))) |currency:'INR'}} Off)</p>
+              <h6 class="product-price">{{ item.product.price - (item.product.price * (item.product.discount/100)) | currency:'INR' }}</h6>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="input-group" style="width: 120px;">
+                  <button class="btn btn-outline-secondary" type="button" (click)="decreaseQuantity(item)">-</button>
+                  <input type="text" class="form-control text-center " value="{{item.quantity}}" readonly>
+                  <button class="btn btn-outline-secondary" type="button" (click)="increaseQuantity(item)">+</button>
+                </div>
+                <button class="btn btn-danger btn-sm" (click)="removeItem(item)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price Details Section -->
+    <div class="col-lg-4">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h5 class="card-title">Price Details</h5>
+          <hr>
+          <p class="card-text">Price ({{cartItems.length}} items): {{getTotalPrice() | currency:'INR'}}</p>
+          <p class="card-text">Discount: {{getTotalDiscount() | currency:'INR'}}</p>
+          <p class="card-text">Delivery Charges: Free</p>
+          <hr>
+          <h5>Total Amount: {{getTotalPrice()-getTotalDiscount() | currency:'INR'}}</h5>
+          <button class="btn btn-primary w-100 mt-3" (click)="checkout()">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

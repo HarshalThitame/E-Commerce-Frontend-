@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg px-4 sticky-top" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" [routerLink]="['/seller/dashboard']">
+    <img [src]="'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/Logo.png'" class="logo-image" alt="logo"/>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+<!--    <ul class="navbar-nav mr-auto">-->
+<!--      <li class="nav-item active">-->
+<!--        <a class="nav-link"  [routerLink]="['/seller/dashboard']">Home</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" [routerLink]="['/seller/products-details']">My Products</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Orders</a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Reports</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <span class="navbar-text">-->
+<!--      Manage your store efficiently-->
+<!--    </span>-->
+  </div>
+  <a class="navbar-brand" href="#" [routerLink]="['/seller/dashboard']" >{{ user.businessName }}</a>
+
+  <div class="navbar-toggler-right d-flex align-items-center">
+    <button *ngIf="!isLoggedIn" [routerLink]="['/login']" mat-button class="m-2">Login</button>
+
+    <!-- Profile Picture Dropdown -->
+    <div *ngIf="isLoggedIn" class="dropdown d-inline">
+      <img
+        [src]="user.profileImage || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1725565847~exp=1725569447~hmac=664dea48857b0bc203f6b779057d433ef6c6f5dc90789739ee756db46a3f518a&w=740'"
+        alt="Profile Picture"
+        class="rounded-circle"
+        style="width: 45px; height: 45px; object-fit: cover; cursor: pointer;"
+        (click)="toggleDropdown($event)"
+      >
+      <div class="dropdown-menu" [ngClass]="{'show': dropdownOpen}" style="cursor: pointer;">
+        <a class="dropdown-item" href="#" [routerLink]="['/seller/profile']">My Profile</a>
+        <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+
+</nav>
+<app-seller-order-notification />

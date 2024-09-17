@@ -1,0 +1,28 @@
+.navbar{
+  z-index: 1000; /* Ensure it is behind the navbar */
+}
+.navbar-toggler-right {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0; /* Align to the left of the profile picture */
+  transform: translateX(-10px); /* Adjust for spacing */
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+.logo-image{
+  height:55px;
+  object-fit:contain;
+}

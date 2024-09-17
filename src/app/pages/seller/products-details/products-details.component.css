@@ -1,0 +1,40 @@
+p{
+  font-size: 12px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+  height: 150px;
+  object-fit: contain;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-text {
+  margin-bottom: 10px;
+}
+
+.glow-on-hover{
+  margin: 0;
+  width: 100%;
+  padding: 10px;
+}

@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid orders-page">
+  <div class="row">
+    <!-- Sidebar for desktop -->
+    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="position-sticky">
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            [class.active]="selectedTab === 'orders'"
+            (click)="showOrders()">
+            My Orders
+          </li>
+          <li
+            class="list-group-item"
+            [class.active]="selectedTab === 'wishlist'"
+            (click)="showWishlist()">
+            My Wishlist
+          </li>
+          <!-- Add more items as needed -->
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="col-12 col-md-9 col-lg-10">
+      <!-- Sidebar toggle button for mobile -->
+      <button class="btn btn-outline-secondary d-md-none mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+        <i class="fa-solid fa-angles-right"></i>
+      </button>
+
+      <!-- Off-canvas sidebar for mobile -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header">
+          <h5 id="sidebarLabel">Sidebar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="list-group">
+            <li
+              class="list-group-item"
+              [class.active]="selectedTab === 'orders'"
+              (click)="showOrders(); ">
+              My Orders
+            </li>
+            <li
+              class="list-group-item"
+              [class.active]="selectedTab === 'wishlist'"
+              (click)="showWishlist();">
+              My Wishlist
+            </li>
+            <!-- Add more items as needed -->
+          </ul>
+        </div>
+      </div>
+
+      <app-all-orders *ngIf="selectedTab === 'orders'"></app-all-orders>
+      <app-wishlist *ngIf="selectedTab === 'wishlist'"></app-wishlist>
+    </main>
+  </div>
+</div>

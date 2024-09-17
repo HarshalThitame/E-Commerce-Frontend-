@@ -1,0 +1,195 @@
+<app-seller-navbar></app-seller-navbar>
+<div class="seller-dashboard-container">
+  <!-- Sidebar and Main Content -->
+  <div class="seller-content">
+    <app-seller-sidenav></app-seller-sidenav>
+
+    <div class="container-fluid mt-4">
+    <h4>Inventory</h4>
+      <div class="row">
+        <!-- Current Stock Levels Card -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-info h-100">
+            <div class="card-header bg-primary text-white">
+              Current Stock Levels
+            </div>
+            <div class="card-body table-container">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th class="text-end pr-4">Quantity</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of stockLevels">
+                    <td>{{ item.name }}</td>
+                    <td class="text-end pr-4" [ngClass]="{'text-danger': item.stockQuantity < 20, 'text-success': item.stockQuantity >= 20}">
+                      {{ item.stockQuantity }} units
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stock History Card -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-primary h-100">
+            <div class="card-header bg-info text-white">
+              Stock History
+            </div>
+            <div class="card-body table-container">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th class="stock-product">Product</th>
+                    <th class="stock-changetype text-center">Change Type</th>
+                    <th class="stock-change text-center">Change</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let data of stockHistory">
+
+                    <td>{{ data.updatedAt | date:'dd/MM/YYYY h:mm a' }}</td>
+                    <td class="stock-product">{{ data.productName }}</td>
+                    <td class="stock-changetype text-center">{{ data.changeType }}</td>
+                    <td class="stock-change text-center" [ngClass]="{'text-danger': data.changeAmount < 0, 'text-success': data.changeAmount > 0}">
+                      <span *ngIf="data.changeAmount > 0"> +{{ data.changeAmount }}</span>
+                      <span *ngIf="data.changeAmount < 0">  {{ data.changeAmount }}</span>
+                    </td>
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warehouse Management Card -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-success h-100">
+            <div class="card-header bg-secondary text-white">
+              Warehouse Management
+            </div>
+            <div class="card-body table-container">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>Warehouse</th>
+                    <th>Location</th>
+                    <th>Stock Level</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let warehouse of warehouseManagement">
+                    <td>{{ warehouse.warehouse }}</td>
+                    <td>{{ warehouse.location }}</td>
+                    <td>{{ warehouse.stock }} units</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Inventory Alerts Card -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-warning h-100">
+            <div class="card-header bg-danger text-white">
+              Inventory Alerts
+            </div>
+            <div class="card-body table-container">
+              <div class="table-responsive">
+                <table class="table table-striped ">
+                  <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th class="quantity text-center">Quantity</th>
+                    <th class="status text-center">Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let alert of inventoryAlerts">
+
+                    <td class="pointer" [routerLink]="'/seller/product-info/'+alert.id">{{ alert.name }}</td>
+                    <td class="quantity text-center">{{ alert.stockQuantity }}</td>
+                    <td class="status text-center" [ngClass]="{'outOfStock': alert.status == 'OUT OF STOCK', 'critical': alert.status == 'CRITICAL STOCK','lowStock': alert.status == 'LOW STOCK'}">
+                      {{ alert.status }}</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Selling Products Card -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-warning h-100">
+            <div class="card-header bg-success text-white">
+              Top Selling Products
+            </div>
+            <div class="card-body table-container">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th class="rank">Rank</th>
+                    <th>Product</th>
+                    <th class="text-center totalSales">Total Sales</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of topSellingProducts;let i = index;">
+                    <td class="rank">{{i+1}}</td>
+                    <td class="pointer" [routerLink]="'/seller/product-info/'+item.productId">{{ item.productName }}</td>
+                    <td class="text-end totalSales text-center">{{ item.totalSales |currency:'INR' }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Less Selling Products Card -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-danger h-100">
+            <div class="card-header bg-danger text-white">
+              Less Selling Products
+            </div>
+            <div class="card-body table-container">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Sales</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of lessSellingProducts">
+                    <td>{{ item.product }}</td>
+                    <td>${{ item.sales }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div *ngIf="filteredProducts.length > 0">
+  <h5 class="mb-4">Manage Products
+    <i style="font-size: 15px;"
+       class="fa fa-info-circle"
+       data-toggle="tooltip"
+       data-placement="top"
+       title="You may use the numeric keypad to navigate through pages or jump directly to a specific page.">
+    </i>
+  </h5>
+  <div class="container mt-4">
+    <!-- Filter Switch -->
+    <div class="d-flex justify-content-between form-check form-switch mb-2">
+      <div >
+
+        <!-- Search Input -->
+        <div  class="input-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Search here..." [formControl]="searchControl" />
+        </div>
+      </div>
+      <div *ngIf="!filterNoImage" class="mt-2">
+        <input class="form-check-input" type="checkbox" role="switch" id="filterSwitch" (change)="onSwitchChange($event)">
+        <label class="form-check-label" for="filterSwitch">Show Published Only</label>
+      </div>
+      <div class="mt-2">
+        <button class="glow-on-hover" [routerLink]="'/seller'">Add New Product</button>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <!-- Products Grid -->
+      <div class="col-md-3 mb-4"
+           *ngFor="let product of filteredProducts | paginate: { itemsPerPage: itemPerPage, currentPage: p }">
+        <div class="card h-100 product-card shadow-lg">
+          <img
+            [src]="product.images && product.images.length > 0
+            ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + product.images[0].url
+            : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+            class="card-img-top product-image mt-2"
+            alt="{{ product.name }}">
+
+          <div class="card-body">
+            <a [routerLink]="'/seller/product-info/'+product.id">
+              <h6 class="card-title truncate-multiline">{{ product.name }}</h6>
+              <p class="card-text"><strong>{{ product.price | currency:'INR' }}</strong></p>
+              <p class="card-text">Stock: {{ product.stockQuantity }}</p>
+              <div class="price-and-rating">
+            <span *ngIf="product.reviewsAndRatings.length > 0" class="rating">
+                       <!-- Full Stars -->
+                                <i class="fa fa-star static-star" *ngFor="let star of getStars(product.avgRating)"></i>
+
+              <!-- Half Star -->
+                                <i class="fa fa-star-half-alt static-star" *ngIf="getHalfStar(product.avgRating)"></i>
+              {{ product.avgRating }}/5
+                <span class="text-muted">({{ product.reviewsAndRatings.length }}reviews) </span>
+            </span>
+
+                <span *ngIf="product.reviewsAndRatings.length == 0">
+               <span class="text-muted">(0 reviews) </span>
+            </span>
+              </div>
+            </a>
+
+            <!-- Publish Switch -->
+            <div *ngIf="product.images.length >= 1; else noImagesWarning" class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" [checked]="product.published"
+                     (change)="togglePublish(product)">
+              <label class="form-check-label">{{ product.published ? 'Published' : 'Unpublished' }}</label>
+            </div>
+
+            <!-- Warning message for no images -->
+            <ng-template #noImagesWarning>
+              <p class="text-danger">Please add images to publish your product.</p>
+            </ng-template>
+
+
+            <div class="d-flex justify-content-between mt-2 frame">
+              <button class="btn btn-primary btn-sm" [routerLink]="'/seller/edit-product/'+product.id">Edit</button>
+              <button class="btn btn-primary btn-sm" [routerLink]="'/seller/add-images/'+product.id">Images</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Delete</button>
+              <!-- Uncomment this line if you want to show the "View Details" button -->
+              <!-- <button class="btn btn-info btn-sm" (click)="viewProductDetails(product.id)">View Details</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div *ngIf="filteredProducts.length > itemPerPage" class="row">
+      <div class="col-12 d-flex justify-content-end">
+        <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="filteredProducts.length == 0" class="d-flex justify-content-center">
+  <img src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?t=st=1725898734~exp=1725902334~hmac=3a729aae750e9e49effe54f181565099b335162efba11a4ce0db94cd97014a79&w=740">
+</div>

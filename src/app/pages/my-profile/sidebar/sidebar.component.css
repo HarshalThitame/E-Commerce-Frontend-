@@ -1,0 +1,65 @@
+.sidenav-container {
+  height: 100%;
+  background: #fafafa; /* Light background for the entire container */
+}
+
+mat-sidenav {
+  width: 300px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  background: #e3f2fd;
+  color: #323131;
+  padding: 16px;
+  border-bottom: 2px solid #3700b3;
+  border-radius: 8px;
+}
+
+.profile-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+mat-nav-list {
+  margin-top: 20px;
+}
+
+mat-list-item {
+  padding: 12px 16px;
+  border-radius: 4px;
+}
+
+mat-list-item:hover {
+  background-color: #e0e0e0; /* Subtle background on hover */
+}
+
+.toolbar {
+  display: none;
+}
+
+.toggle-button {
+  display: none; /* Hide by default */
+}
+
+@media (max-width: 768px) {
+  .toggle-button {
+    display: block; /* Show toggle button on mobile */
+  }
+
+  .toolbar {
+    display: block;
+    background: white;
+  }
+
+  .mat-icon {
+    color: #000000;
+  }
+}

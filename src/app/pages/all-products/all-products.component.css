@@ -1,0 +1,127 @@
+/* General Styles */
+img {
+  display: block;
+  height: 150px;
+  object-fit: contain;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+p {
+  font-size: 12px;
+}
+.input-box{
+  margin: 0;
+  width: 90%;
+}
+/* Sidebar Styling */
+.sidebar {
+  position: fixed; /* Fixed position */
+  top: 0;
+  left: 0;
+  width: 250px; /* Set width */
+  height: 100vh; /* Full height */
+  background-color: white; /* Background color */
+  transform: translateX(-100%); /* Start hidden off-screen */
+  transition: transform 0.5s ease; /* Smooth transition */
+  z-index: 1000; /* Ensure sidebar is above other content */
+  display: flex;
+  flex-direction: column;
+  padding: 10px; /* Padding around the sidebar */
+
+}
+
+/* Sidebar Button Styling */
+.sidebar .btn-container {
+  margin-bottom: 10px; /* Margin around the button */
+}
+
+/* Close Button Container */
+.sidebar .close-btn-container {
+  display: flex;
+  justify-content: flex-end; /* Aligns button to the right */
+}
+
+.sidebar.active {
+  transform: translateX(0); /* Slide in */
+}
+
+/* Adjust Main Content Width */
+.col-md-12 {
+  margin-left: 0;
+}
+
+.col-md-9.col-lg-10 {
+  margin-left: 250px; /* Adjust for sidebar width */
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 90%; /* Full width on small screens */
+
+  }
+  .col-md-9.col-lg-10 {
+    margin-left: 0; /* Reset margin on small screens */
+  }
+  .glow-on-hover{
+    min-width: 100%;
+  }
+  .btn-outline-secondary{
+  border: none;
+  }
+  h5{
+    font-size: 16px!important;
+  }
+  .glow-on-hover{
+    height: 30px;
+  }
+}
+
+/* Product List Styles */
+.product-list {
+  padding: 20px 0;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #212121;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #757575;
+  margin-bottom: 10px;
+}
+
+.price-and-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #212121;
+}
+
+.rating {
+  color: #ffb400;
+  font-size: 0.8rem;
+  margin-right: 10%;
+}
+
+.glow-on-hover{
+  width: 10%;
+}

@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div class="row">
+    <!-- Left Column: Product Details and Order Summary -->
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-body">
+          <!-- In checkout.component.html -->
+          <div *ngIf="fetchedData">
+            <app-order-summary [orderData]="fetchedData"></app-order-summary>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!addressForm" class="card mb-3">
+        <div class="card-body">
+          <div class="d-grid gap-2">
+            <button (click)="openAddressForm()" class="btn btn-primary btn-lg w-100" type="button">
+              Add New Address
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="addressForm" class="card mb-3">
+        <div class="card-body">
+          <h4 class="card-title">Delivery Address</h4>
+          <app-address-form></app-address-form>
+        </div>
+      </div>
+      <div   class="card mb-3">
+        <div class="card-body">
+          <app-saved-addresses></app-saved-addresses>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <app-payment-methods (paymentData)="handlePaymentData($event)"></app-payment-methods>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Additional Info or Offers -->
+
+          <!-- Add additional info or promotional content here -->
+          <div class="col-lg-4">
+            <div class="card shadow-lg">
+              <div class="card-body">
+                <h5 class="card-title">Price Details</h5>
+                <hr>
+                <p class="card-text">Price ({{cartItems.length}} items): {{getTotalPrice() | currency:'INR'}}</p>
+                <p class="card-text">Discount: {{getTotalDiscount() | currency:'INR'}}</p>
+                <p class="card-text">Delivery Charges: Free</p>
+                <hr>
+                <h5>Total Amount: {{getTotalPrice()-getTotalDiscount() | currency:'INR'}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<app-send-orderinfo-email [orderItems] = "fetchedData" [payment] = "payment" [shippingAddress]="shippingAddress" [user] = "user" style="display: none"></app-send-orderinfo-email>

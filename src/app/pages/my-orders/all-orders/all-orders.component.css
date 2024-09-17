@@ -1,0 +1,272 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.orders-page {
+  margin-top: 20px;
+}
+
+.orders-header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 300px;
+}
+
+.empty-orders {
+  text-align: center;
+}
+
+.order-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-right: 15px;
+}
+
+.order-details p {
+  margin: 0;
+}
+
+.order-status p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.btn-outline-primary {
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.btn {
+  width: 100%;
+  max-width: 120px; /* Adjusted for responsiveness */
+  height: 36px;
+  cursor: pointer;
+  background: #4a90e2;
+  border: 1px solid #4a90e2;
+  outline: none;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #ffffff;
+  border-radius: 5px;
+  position: relative;
+}
+
+.btn:hover {
+  background: #357abd;
+  border-color: #357abd;
+}
+
+svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #ffffff;
+  stroke-dasharray: 90 288;
+  stroke-dashoffset: 90;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.btn:hover svg {
+  stroke-dashoffset: -288;
+}
+
+.delete {
+  background: #f6616c;
+  border: 1px solid #f6616c;
+}
+
+.delete:hover {
+  background: #fd5663;
+  border-color: #fd5663;
+}
+
+.cart {
+  background: #28a745;
+  border: 1px solid #28a745;
+}
+
+.cart:hover {
+  background: #1b9e39;
+  border-color: #1b9e39;
+}
+
+.btn span {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.no-orders {
+  height: 500px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .search-bar input {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .order-card {
+    padding: 10px;
+  }
+
+  .btn {
+    max-width: 100px;
+  }
+
+  .order-details p {
+    font-size: 15px; /* Reduced font size for medium screens */
+  }
+
+  .order-status p {
+    font-size: 13px; /* Reduced font size for medium screens */
+  }
+
+  .btn {
+    max-width: 100px;
+    font-size: 13px; /* Reduced font size for buttons */
+  }
+}
+
+@media (max-width: 992px) {
+  .orders-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-bar input {
+    max-width: 100%;
+  }
+
+  .order-card {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  .product-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .btn {
+    max-width: 100%;
+  }
+  .order-details p {
+    font-size: 14px; /* Further reduced font size for smaller screens */
+  }
+
+  .order-status p {
+    font-size: 12px; /* Further reduced font size for smaller screens */
+  }
+
+  .btn {
+    max-width: 100%;
+    font-size: 12px; /* Further reduced font size for buttons */
+  }
+}
+
+@media (max-width: 768px) {
+  .order-card {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .product-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .search-bar input {
+    max-width: 100%;
+  }
+
+  h4{
+    font-size: 20px;
+    margin: 10px;
+  }
+
+  .btn {
+    max-width: 100%;
+    font-size: 12px;
+  }
+  .order-details p {
+    font-size: 13px; /* Further reduced font size for mobile screens */
+  }
+
+  .order-status p {
+    font-size: 11px; /* Further reduced font size for mobile screens */
+  }
+
+  .btn {
+    max-width: 100%;
+    font-size: 11px; /* Further reduced font size for buttons */
+  }
+
+  .orders-list {
+    padding: 0 10px;
+  }
+
+  .mt-3,.mb-3,.order-status{
+    margin: 0!important;
+  }
+
+
+}
+
+@media (max-width: 576px) {
+  .orders-header {
+    text-align: center;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .order-card {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  .product-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .btn {
+    font-size: 12px;
+  }
+
+  .order-details p {
+    font-size: 12px; /* Further reduced font size for very small screens */
+  }
+
+  .order-status p {
+    font-size: 10px; /* Further reduced font size for very small screens */
+  }
+
+  .btn {
+    font-size: 10px; /* Further reduced font size for buttons */
+  }
+}

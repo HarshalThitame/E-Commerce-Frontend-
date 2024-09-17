@@ -1,0 +1,57 @@
+/* Custom styling for the navbar */
+.custom-navbar {
+  background-color: #e3f2fd;
+}
+
+/* Adjust the logo size */
+.logo-image {
+  height: 55px;
+  object-fit: contain;
+}
+
+/* Navbar padding and margin adjustments for responsiveness */
+.navbar-nav .nav-link {
+  margin-right: 1rem;
+}
+
+.navbar-text {
+  margin-left: auto;
+}
+
+/* Styling for buttons inside the navbar */
+.navbar-buttons .m-2 {
+  margin: 0.5rem;
+}
+
+/* Handle responsive behavior */
+@media (max-width: 991px) {
+  .navbar-buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+/* For smaller screen sizes, adjust the text size and padding */
+@media (max-width: 576px) {
+  .navbar-brand img {
+    height: 40px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 14px;
+  }
+
+  .navbar-text {
+    font-size: 12px;
+  }
+}

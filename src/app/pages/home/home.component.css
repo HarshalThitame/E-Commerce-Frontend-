@@ -1,0 +1,387 @@
+body {
+  background-color: #2934ec;
+}
+
+img {
+  display: block;
+  height: 200px;
+  object-fit: contain;
+
+}
+
+h6 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+}
+
+mat-card-title {
+  font-size: 18px;
+}
+
+.polaroid {
+  width: 80%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card {
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+div.container {
+  text-align: center;
+  padding: 10px 20px;
+
+}
+
+.scrollable-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-container {
+  scroll-behavior: smooth;
+  white-space: nowrap;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.scroll-container > .col-md-4 {
+  flex: 0 0 auto;
+}
+
+.suggestions-container > .col-md-4 {
+  flex: 0 0 30%;
+}
+
+.scroll-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-suggestion {
+  flex-wrap: wrap;
+}
+
+.card-wrapper {
+  flex: 0 0 auto;
+  width: 250px; /* Adjust based on your card width */
+  margin-right: 1rem; /* Space between cards */
+}
+
+a {
+  text-decoration: none; /* Remove underline */
+  color: #000000; /* Change link text color */
+}
+
+.custom-card {
+  border-top: lightskyblue solid 1px;
+  border-left: lightskyblue solid 1px;
+  border-bottom: lightcoral solid 2px;
+  border-right: lightcoral solid 2px;
+  background-color: rgba(255, 255, 255, 0.8); /* Sky blue color with slight transparency */
+  box-shadow: none; /* Remove default shadow if needed */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  margin-bottom: 10px;
+}
+
+.product-card {
+  background-color: rgba(255, 255, 255, 0.8); /* Sky blue color with slight transparency */
+  box-shadow: none;
+  border-radius: 8px;
+  border: none;
+}
+
+hr {
+  color: lightcoral;
+}
+
+.custom-card .more-button {
+  margin-left: auto; /* Pushes the button to the right */
+  font-size: 14px; /* Adjusts the font size of the button */
+  color: #1976d2; /* Optional: Changes the button color */
+}
+
+.add-to-cart {
+  width: 100%; /* Makes the button full width */
+  border-top: 1px solid #ddd; /* Optional: Add a border to separate the button from the content */
+  border-radius: 0 0 4px 4px; /* Matches the card's rounded corners */
+  background-color: #5d63cc; /* Flipkart's orange color for the "Add to Cart" button */
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.add-to-cart:hover {
+  background-color: #fb641b; /* Darken the button on hover */
+}
+
+.card-body {
+  text-align: left;
+}
+
+.home-img-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 100%; /* Ensure the container does not exceed the image's width */
+}
+
+.home-img {
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border-radius: 10px;
+  width: 80%; /* Responsive width */
+  max-width: 300px; /* Maximum width for larger screens */
+}
+
+.overlay h2 {
+  margin: 0 0 10px 0;
+  font-size: 18px; /* Adjust font size */
+}
+
+.shop-now-btn {
+  background-color: #f0c14b; /* Adjust color as needed */
+  border: none;
+  padding: 8px 16px; /* Adjust padding */
+  font-size: 14px; /* Adjust font size */
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.shop-now-btn:hover {
+  background-color: #e7a336; /* Adjust color as needed */
+}
+
+.sale {
+  font-size: 100px;
+  margin: 50px;
+}
+
+.product-col {
+  flex: 1 0 15%; /* Default to 3 items per row for larger screens */
+  max-width: 15%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+
+  .custom-card{
+    border: none;
+    border-bottom: #000000 solid 1px;
+    border-top: lightblue solid 1px;
+  }
+
+  .overlay {
+    padding: 8px 15px; /* Adjust padding for smaller screens */
+    width: 90%; /* Adjust width for smaller screens */
+    max-width: none; /* Remove max-width */
+  }
+
+  .overlay h2 {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+
+  .shop-now-btn {
+    padding: 6px 12px; /* Adjust padding for smaller screens */
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  .sale {
+    font-size: 40px;
+    margin: 10px;
+  }
+
+  .custom-product-row {
+    display: flex;
+    /*flex-wrap: wrap;*/
+  }
+
+
+
+  .product-col,.product-col-sug {
+    flex: 1 0 33.33%; /* 3 items per row */
+    max-width: 33.33%;
+  }
+
+  img {
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .card-title,h6,.more-button,mat-card-title {
+    font-size: 0.8rem !important; /* 70% reduction */
+    padding: 10px;
+  }
+
+  .product-price {
+    font-size: 0.6rem; /* 70% reduction */
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.6rem; /* 70% reduction */
+    margin: 0;
+  }
+
+  .glow-on-hover,.out-of-stock {
+    font-size: 0.6rem;
+    height: 25px;
+    margin: 0;
+    width: 100%!important;
+  }
+
+  .wishlist-icon {
+    position: absolute!important;
+    top: 5px!important;
+    right: 5px!important;
+    background: none!important;
+    border: none!important;
+    cursor: pointer!important;
+    font-size: 10px!important;
+    color: #ddd!important; /* Default color */
+    transition: color 0.3s!important;
+  }
+
+  .btn-outline-danger,.mat-card-actions,.m-3{
+    margin: 0!important;
+  }
+
+  .product-col-sug{
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+
+
+  .card-title, .product-price, p {
+    font-size: 0.7rem; /* Reduce font size by 70% */
+  }
+
+  .r-desc {
+    width: 100% !important;
+  }
+
+  .r-hl {
+    display: none;
+  }
+.r-mobile{
+  height: 100px;
+}
+  .r-img, .r-desc, .r-hl {
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .r-desc {
+    margin-bottom: 0.5rem;
+  }
+
+  tr, td, th {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .overlay {
+    padding: 5px 10px; /* Further adjust padding */
+    width: 95%; /* Further adjust width */
+  }
+
+  .overlay h2 {
+    font-size: 14px; /* Further adjust font size */
+  }
+
+  .shop-now-btn {
+    padding: 4px 8px; /* Further adjust padding */
+    font-size: 10px; /* Further adjust font size */
+  }
+
+  .sale {
+    font-size: 40px;
+    margin: 10px;
+  }
+}
+
+/* Wishlist Icon Styling */
+.wishlist-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ddd; /* Default color */
+  transition: color 0.3s;
+}
+
+.wishlist-icon.added {
+  color: #f00; /* Color when added to wishlist */
+}
+
+.wishlist-icon i {
+  pointer-events: none;
+}
+
+.offers {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.r-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.r-desc {
+  width: 30%;
+
+}
+
+.r-product {
+  cursor: pointer;
+}

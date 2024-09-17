@@ -1,0 +1,90 @@
+<div class="container p-4">
+  <div class="card shadow-lg mb-2">
+    <div class="card-header text-center">
+      <h6>Profile</h6>
+    </div>
+  </div>
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group text-center">
+              <!-- Profile Picture Display -->
+              <img
+                [src]="user.profileImage || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'"
+                alt="Profile Picture"
+                class="rounded-circle img-fluid"
+                style="width: 130px; height: 130px; object-fit: cover; cursor: pointer;"
+                (click)="triggerFileInput()"
+              >
+              <div class="mt-3">
+                <!-- Hidden file input -->
+                <input
+                  type="file"
+                  id="profileImage"
+                  (change)="onProfilePictureChange($event)"
+                  style="display: none;"
+                  accept="image/*"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Enter your first name">
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Enter your last name">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control disabled" id="email" formControlName="email" placeholder="Enter your email">
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Enter your phone number">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="panCardNumber">PAN Card Number</label>
+              <input type="text" class="form-control" id="panCardNumber" formControlName="panCardNumber" placeholder="Enter your PAN card number">
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="dateOfBirth">Date of Birth</label>
+              <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select class="form-control" id="gender" formControlName="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 btn-block" [disabled]="!profileForm.valid">Update Profile</button>
+      </form>
+    </div>
+  </div>
+</div>

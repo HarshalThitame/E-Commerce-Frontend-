@@ -1,0 +1,21 @@
+<div class="address-container">
+  <h4 class="card-title">Deliver here...</h4>
+  <form>
+    <div *ngFor="let address of savedAddresses" class="address-card">
+      <label class="radio-container">
+        <input
+          type="radio"
+          name="address"
+          [value]="address"
+          (change)="selectAddress(address)"
+          [checked]="address === selectedAddress"
+        />&nbsp;<strong>{{address.firstName}} {{address.lastName}}</strong>
+        <span class="checkmark"></span>
+        <div class="address-details">
+          <p>{{ address.addressLine1 }} , {{ address.addressLine2 }}, {{ address.city }}, {{ address.state }}, {{ address.zipCode }}</p>
+          <p>{{ address.country }}</p>
+        </div>
+      </label>
+    </div>
+  </form>
+</div>

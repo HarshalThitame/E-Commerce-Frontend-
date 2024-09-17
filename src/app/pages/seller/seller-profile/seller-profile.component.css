@@ -1,0 +1,9 @@
+.form-group{
+  margin-bottom: 30px;
+}
+.rounded-circle {
+  border-radius: 50%;
+}
+.card-header{
+  background: #e3f2fd;
+}

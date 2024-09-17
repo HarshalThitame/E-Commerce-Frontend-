@@ -1,1 +1,217 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css'; /* You can add global styles to this file, and also import other style files */
+*{
+  font-family:"Laila", serif;
+}
+html, body {
+  height: 100%;
+}
+body { margin: 0;
+
+  box-shadow: none; /* Remove default shadow if needed */
+  border-radius: 8px;
+}
+
+.glow-on-hover {
+  width: 85%;
+  height: 40px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  text-align: center;
+  margin: 20px;
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+.go-to-cart{
+  background: #007bff;
+}
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;       /* Number of lines to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;     /* Add ellipsis (...) */
+  width: 90%;                /* Set a specific width */
+}
+
+app-navbar {
+  position: sticky;
+  top: 0; /* Sticks to the top of the viewport */
+  z-index: 1000; /* Ensures it stays on top of other content */
+  background-color: #fff; /* Optional: set a background color to prevent transparency */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: add a subtle shadow for visual separation */
+}
+
+
+/*My Profile*/
+
+/* Override some of Angular Material's default styles */
+.mat-sidenav {
+  background: #fafafa; /* Light background for sidebar */
+}
+
+.mat-card {
+  background: #ffffff; /* White background for cards */
+}
+
+.mat-card-header {
+  background: #6200ea; /* Primary color for card headers */
+  color: white;
+}
+
+.mat-card-title {
+  color: white;
+}
+
+.mat-list-item {
+  color: #333; /* Dark color for list items */
+}
+
+.mat-list-item:hover {
+  background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+.mat-button {
+  background: #6200ea; /* Primary color for buttons */
+  color: white;
+}
+
+.mat-button:hover {
+  background: #3700b3; /* Darker shade for button hover */
+}
+
+/* Custom styles for profile page */
+.profile-info {
+  background: #6200ea;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.profile-info h4, .profile-info h2 {
+  margin: 0;
+}
+
+.mat-radio-group {
+  margin-top: 8px;
+}
+
+mat-card-content {
+  padding: 16px;
+}
+
+mat-card-content p {
+  margin: 8px 0;
+}
+
+.out-of-stock{
+  width: 100%;
+}
+
+
+/*Search box*/
+
+
+.input-box {
+  position: relative;
+  height: 46px;
+  max-width: 500px;
+  width: 100%;
+  background: #fff;
+  margin: 0 20px;
+  border: 1px solid #737272;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.input-box i,
+.input-box .button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input-box i {
+  left: 10px;
+  font-size: 30px;
+  color: #707070;
+}
+.input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  padding: 0 0 0 65px;
+  background-color: transparent;
+}
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .input-box {
+    height: 46px;
+    margin: 0 8px;
+  }
+  .input-box i {
+    left: 12px;
+    font-size: 25px;
+  }
+  .input-box input {
+    padding: 0 0 0 50px;
+  }
+}
+
+
+/*Disable click on img*/
+.disabled-click{
+  pointer-events: none;
+}

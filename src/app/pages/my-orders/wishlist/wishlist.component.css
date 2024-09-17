@@ -1,0 +1,152 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Wishlist Page Styles */
+.wishlist-page {
+  margin-top: 20px;
+}
+
+.wishlist-header {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wishlist-header h4 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.wishlist-header .search-bar {
+  flex: 1;
+  max-width: 300px;
+}
+
+.wishlist-header .search-bar input {
+  width: 100%;
+}
+
+.wishlist-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  max-width: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.wishlist-details p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.wishlist-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty-wishlist {
+  text-align: center;
+}
+
+.empty-wishlist .no-wishlist {
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .wishlist-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wishlist-header h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .wishlist-header .search-bar {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .wishlist-card {
+    padding: 12px;
+  }
+
+  .product-image {
+    max-width: 80px;
+  }
+
+  .wishlist-actions {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .wishlist-header .search-bar input {
+    width: 100%;
+  }
+
+  .wishlist-card {
+    padding: 10px;
+  }
+
+  .product-image {
+    max-width: 70px;
+  }
+
+  .wishlist-actions {
+    width: 110%;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .wishlist-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .wishlist-header h4 {
+    font-size: 18px;
+  }
+
+  .wishlist-header .search-bar input {
+    font-size: 14px;
+  }
+
+  .product-image {
+    max-width: 60px;
+  }
+
+  .wishlist-actions button {
+    width: 100%;
+  }
+}

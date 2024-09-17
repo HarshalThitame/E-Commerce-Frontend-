@@ -1,0 +1,64 @@
+<mat-toolbar class="toolbar">
+  <button mat-icon-button (click)="toggleSidenav($event)" class="toggle-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav [mode]="sidenavMode" [opened]="isSidenavOpened">
+    <div class="profile-info d-flex align-items-center">
+      <!-- User Info -->
+      <div class="ml-3">
+        <h4>Hello,</h4>
+        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+      </div>
+    </div>
+
+    <mat-nav-list>
+      <!-- Parent Option: Account Settings -->
+      <mat-expansion-panel class="parent-panel mb-2" [expanded]="isAccountSettingsExpanded">
+        <mat-expansion-panel-header>
+          <mat-panel-title>ACCOUNT SETTINGS</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <mat-list-item routerLink="/user/profile/my-profile/personal-info" (click)="onNavItemClick($event)">Profile Information</mat-list-item>
+          <mat-list-item routerLink="/user/profile/my-profile/manage-addresses" (click)="onNavItemClick($event)">Manage Addresses</mat-list-item>
+          <mat-list-item routerLink="/profile/pan-card" (click)="onNavItemClick($event)">PAN Card Information</mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <!-- Parent Option: Payments -->
+      <mat-expansion-panel class="parent-panel m-2" [expanded]="isPaymentsExpanded">
+        <mat-expansion-panel-header>
+          <mat-panel-title>PAYMENTS</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <mat-list-item (click)="onNavItemClick($event)">Gift Cards ₹0</mat-list-item>
+          <mat-list-item (click)="onNavItemClick($event)">Saved UPI</mat-list-item>
+          <mat-list-item (click)="onNavItemClick($event)">Saved Cards</mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <!-- Parent Option: My Stuff -->
+      <mat-expansion-panel class="parent-panel m-2" [expanded]="isMyStuffExpanded">
+        <mat-expansion-panel-header>
+          <mat-panel-title>MY STUFF</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <mat-list-item (click)="onNavItemClick($event)">My Coupons</mat-list-item>
+          <mat-list-item (click)="onNavItemClick($event)">My Reviews & Ratings</mat-list-item>
+          <mat-list-item (click)="onNavItemClick($event)">All Notifications</mat-list-item>
+          <mat-list-item (click)="onNavItemClick($event)">My Wishlist</mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+
+      <!-- Other Options -->
+      <mat-list-item [routerLink]="['/user/my-orders',userId]" (click)="onNavItemClick($event)">MY ORDERS</mat-list-item>
+      <mat-list-item (click)="logOut()">Logout</mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

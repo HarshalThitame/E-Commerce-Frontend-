@@ -1,0 +1,57 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="bootstrap-wrapper">
+
+  <div class="container text-center">
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h1 class="text-center">Login </h1>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="formSubmit()" class="mt-5">
+              <!-- username field -->
+              <p>
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input required name="email" [(ngModel)]="loginData.email" matInput
+                         placeholder="Enter email">
+                  <mat-icon matSuffix>mode_edit</mat-icon>
+                  <mat-hint>Valid email !!</mat-hint>
+                </mat-form-field>
+              </p>
+
+
+              <!-- password field -->
+              <p>
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input required name="password" [(ngModel)]="loginData.password"
+                         [type]="hide ? 'password' : 'text'" matInput placeholder="Enter password">
+                  <button mat-icon-button matSuffix (click)="hide = !hide"
+                          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </p>
+
+
+              <!-- buttons -->
+
+              <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-outline-success" type="submit">Login</button>
+                <br><br>
+
+<!--                <a (click)="openSignup()" class="">Don't have an account? Register...</a>-->
+              </div>
+            </form>
+          </div>
+          <!-- <div class="card-footer">
+              <a class="fs-4 my-4">Forgot Password</a>
+          </div> -->
+<!--          <a class="mb-5" (click)="openForgotPassword()">Forgot Password</a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

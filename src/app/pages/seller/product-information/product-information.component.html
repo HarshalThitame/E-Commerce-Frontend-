@@ -1,0 +1,151 @@
+<app-seller-navbar/>
+<div class="seller-dashboard-container">
+  <div class="seller-content">
+    <app-seller-sidenav/>
+    <div class="main-content">
+      <!-- Product Overview Section -->
+      <div class="product-overview">
+        <img
+          [src]="product.images && product.images.length > 0
+            ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + product.images[0].url
+            : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+          class="product-image mt-2"
+          alt="{{ product.name }}">
+
+        <div class="product-details">
+          <h6>{{ product.name }}</h6>
+          <p>MRP :<span class="text-decoration-line-through"> {{product.price | currency:'INR'}}</span></p>
+          <p class="text-success">Discount :  -{{product.discount}}% ({{(product.price)-(product.price - (product.price * (product.discount/100))) |currency:'INR'}} Off)</p>
+          <p class="product-price">{{ product.price - (product.price * (product.discount/100)) | currency:'INR' }}</p>
+          <p class="product-stock">Stock: {{ product.stockQuantity }}</p>
+
+          <!-- Ratings and Reviews Section -->
+          <div *ngIf="productReviews.length>0" class="rating">
+            <!-- Full Stars -->
+            <i class="fa fa-star static-star" *ngFor="let star of getStars(productReviews.averageRating)"></i>
+
+            <!-- Half Star -->
+            <i class="fa fa-star-half-alt static-star" *ngIf="getHalfStar(productReviews.averageRating)"></i>
+
+            <!-- Average Rating and Total Reviews -->
+            <span class="average-rating">{{ productReviews.averageRating || 0 }}/5</span>
+            <span class="total-reviews">({{ productReviews.length || 0 }} reviews)</span>
+          </div>
+
+          <!-- Publish Switch -->
+          <div *ngIf="product.images.length >= 1; else noImagesWarning" class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" [checked]="product.published"
+                   (change)="togglePublish(product)">
+            <label class="form-check-label">{{ product.published ? 'Published' : 'Unpublished' }}</label>
+          </div>
+
+          <!-- Warning message for no images -->
+          <ng-template #noImagesWarning>
+            <p class="text-danger">Please add images to publish your product.</p>
+          </ng-template>
+
+          <button class="btn primary" [routerLink]="'/seller/edit-product/'+product.id">Edit Product</button>
+          <button class="btn secondary" (click)="openDialog(product)">Update Stock</button>
+          <!-- Discount Input Field and Button -->
+            <input type="number" min="0" max="100" [(ngModel)]="discountPercentage" class="form-control-sm m-2" placeholder="%"/>
+            <button class="btn discount" (click)="applyDiscount()">Apply Discount</button>
+        </div>
+      </div>
+
+      <!-- Product Images Gallery Section -->
+      <div *ngIf="product.images.length>0" class="product-images-gallery">
+        <h6>Product Images</h6>
+        <div class="image-gallery">
+          <div *ngFor="let image of product.images" class="gallery-item image-container">
+            <img
+              [src]="product.images && product.images.length > 0
+            ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + image.url
+            : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+              class="gallery-image"
+              alt="{{ product.name }}">
+            <button class="delete-btn" (click)="deleteImage(image)">&#10005;</button>
+          </div>
+          <button class="glow-on-hover" [routerLink]="'/seller/add-images/'+product.id">Add More Images</button>
+        </div>
+      </div>
+
+      <!-- Statistics Cards Section -->
+      <div class="stats-cards">
+        <div class="card">
+          <h3>Total Sales</h3>
+          <p>{{ totalSales | currency:'INR' }}</p>
+        </div>
+        <div class="card">
+          <h3>Total Orders</h3>
+          <p>{{ totalOrders }}</p>
+        </div>
+        <div class="card">
+          <h3>Pending Orders</h3>
+          <p>{{ pendingOrders }}</p>
+        </div>
+        <div class="card">
+          <h3>Returned Orders</h3>
+          <p>{{ returnedOrders }}</p>
+        </div>
+        <div class="card">
+          <h3>Total Revenue</h3>
+          <p>{{ totalRevenue | currency:'INR' }}</p>
+        </div>
+      </div>
+
+      <!-- Ratings & Reviews Section -->
+      <div *ngIf="product.reviewsAndRatings.length > 0" class="ratings-reviews">
+        <div class="rating-summary">
+          <!-- Full Stars -->
+          <i class="fa fa-star static-star" *ngFor="let star of getStars(product.averageRating)"></i>
+          <!-- Half Star -->
+          <i class="fa fa-star-half-alt static-star" *ngIf="getHalfStar(product.averageRating)"></i>
+          {{product.averageRating}}/5
+          <div class="rating-bar-chart">
+            <!-- Rating bars will be rendered here -->
+          </div>
+        </div>
+        <div class="reviews-list">
+          <div *ngFor="let review of product.reviewsAndRatings" class="review">
+            <h6>{{ review.user.firstName }}</h6>
+            <p>{{ review.review }}</p>
+            <!-- Full Stars -->
+            <i class="fa fa-star static-star" *ngFor="let star of getStars(review.rating)"></i>
+            <!-- Half Star -->
+            <i class="fa fa-star-half-alt static-star" *ngIf="getHalfStar(review.rating)"></i>
+            {{review.rating}}/5
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Display each review -->
+      <div *ngIf="productReviews.length>0" #reviewsSection class="">
+        <h6>Ratings & Reviews</h6>
+        <div class="review-card mt-3" *ngFor="let review of productReviews | paginate: { itemsPerPage: 10, currentPage: p}">
+          <div class="d-flex review-header">
+            <span><strong>{{ review.user.firstName }} {{ review.user.lastName }}</strong></span>
+            <span class="review-date">{{ review.createdAt | date:'dd/MM/YYYY h:mm a' }}</span>
+          </div>
+          <div class="rating">
+            <i class="fa fa-star static-star" *ngFor="let star of getStars(review.rating)"></i>
+          </div>
+          <div class="review-body">
+            <p>{{ review.review }}</p>
+          </div>
+          <hr>
+        </div>
+        <!-- Pagination Controls -->
+        <div *ngIf="productReviews.length > 0" class="row mt-4">
+          <div class="col-12 d-flex justify-content-end">
+            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>

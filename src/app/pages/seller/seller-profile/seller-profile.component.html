@@ -1,0 +1,116 @@
+<app-seller-navbar></app-seller-navbar>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <app-seller-sidenav></app-seller-sidenav>
+    </div>
+    <!-- Main Content -->
+    <div class="col-md-10 p-4">
+      <div class="card shadow-lg mb-2">
+        <div class="card-header">
+          <h5>Hello</h5>
+          <h6>{{seller.firstName}} {{seller.lastName}}</h6>
+        </div>
+      </div>
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group text-center">
+                  <!-- Profile Picture Display -->
+                  <img
+                    [src]="seller.profileImage || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1725565847~exp=1725569447~hmac=664dea48857b0bc203f6b779057d433ef6c6f5dc90789739ee756db46a3f518a&w=740'"
+                    alt="Profile Picture"
+                    class="rounded-circle"
+                    style="width: 130px; height: 130px; object-fit: cover; cursor: pointer;"
+                    (click)="triggerFileInput()"
+                  >
+                  <div class="mt-3">
+                    <!-- Hidden file input -->
+                    <input
+                      type="file"
+                      id="profileImage"
+                      (change)="onProfilePictureChange($event)"
+                      style="display: none;"
+                      accept="image/*"
+                    />
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Enter your first name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="Enter your last name">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control disabled" id="email" formControlName="email" placeholder="Enter your email">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Enter your phone number">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="businessName">Business Name</label>
+                  <input type="text" class="form-control" id="businessName" formControlName="businessName" placeholder="Enter your business name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="gstNumber">GST Number</label>
+                  <input type="text" class="form-control" id="gstNumber" formControlName="gstNumber" placeholder="Enter your GST number">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="panCardNumber">PAN Card Number</label>
+                  <input type="text" class="form-control" id="panCardNumber" formControlName="panCardNumber" placeholder="Enter your PAN card number">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="dateOfBirth">Date of Birth</label>
+                  <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="gender">Gender</label>
+                  <select class="form-control" id="gender" formControlName="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3" [disabled]="!profileForm.valid">Update Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

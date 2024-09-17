@@ -1,0 +1,41 @@
+<div class="container-fluid">
+
+  <div class="navbar-card" appearance="raised">
+    <nav class="navbar navbar-expand-lg navbar-transparent justify-content-end align-content-end">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-angles-down"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li *ngFor="let cat of categories" class="nav-item dropdown">
+            <a [href]="'/user/allproducts/category/'+cat.name" class="nav-link dropdown-toggle category-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ cat.name }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ng-container *ngFor="let subCat of cat.subCategories">
+                <div class="dropdown-submenu">
+                  <a [href]="'/user/allproducts/category/'+subCat.name" class="dropdown-item dropdown-toggle category-text" >{{ subCat.name }}</a>
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let subSubCat of subCat.subSubCategories">
+                      <a [href]="'/user/allproducts/category/'+subSubCat.name" class="dropdown-item category-text">{{ subSubCat.name }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </ng-container>
+            </div>
+          </li>
+        </ul>
+        <!-- Search Box -->
+        <div class="search m-2 ">
+          <input [(ngModel)]="searchQuery" placeholder="Search..." (keyup.enter)="search()">
+          <button (click)="search()"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="responsive-search">
+          <input type="search" class="form-control ds-input" [(ngModel)]="searchQuery" placeholder="Search..." (keyup.enter)="search()">
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+</div>

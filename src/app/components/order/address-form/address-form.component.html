@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()" #addressForm="ngForm">
+
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" class="form-control" required [(ngModel)]="address.firstName" name="firstName">
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" class="form-control" required [(ngModel)]="address.lastName" name="lastName">
+  </div>
+  <div class="form-group">
+    <label for="addressLine1">Flat/House No</label>
+    <input type="number" id="addressLine1" class="form-control" required [(ngModel)]="address.addressLine1" name="addressLine1">
+  </div>
+  <div class="form-group">
+    <label for="addressLine2">Address</label>
+    <textarea id="addressLine2" class="form-control" required [(ngModel)]="address.addressLine2" name="addressLine2"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="city">City</label>
+    <input type="text" id="city" class="form-control" required [(ngModel)]="address.city" name="city">
+  </div>
+  <div class="form-group">
+    <label for="state">State</label>
+    <input type="text" id="state" class="form-control" required [(ngModel)]="address.state" name="state">
+  </div>
+  <div class="form-group">
+    <label for="country">Country</label>
+    <input type="text" id="country" class="form-control" required [(ngModel)]="address.country" name="country">
+  </div>
+  <div class="form-group">
+    <label for="zipCode">ZIP Code</label>
+    <input type="text" id="zipCode" class="form-control" required [(ngModel)]="address.zipCode" name="zipCode">
+  </div>
+  <button type="submit" class="btn btn-primary">Save Address</button>
+</form>

@@ -1,0 +1,150 @@
+<app-navbar></app-navbar>
+
+
+<div class="container-fluid product-page">
+<!-- Toggle Sidebar Button -->
+<button class="btn btn-outline-secondary" (click)="toggleSidebar()" id="toggle-sidebar-btn">
+  <i class="fa fa-arrow-alt-circle-right"></i>
+</button>
+  <div class="row">
+    <!-- Sidebar -->
+    <div [ngClass]="{'sidebar': true, 'active': isSidebarOpen}" id="sidebar">
+      <!-- Close Sidebar Button -->
+      <div class="close-btn-container">
+        <button class="btn btn-secondary" (click)="toggleSidebar()" id="close-sidebar-btn">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <!-- Filters Section -->
+      <div class="filters-section mb-4">
+        <h6>Filters</h6>
+        <!-- Search Box -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="input-box">
+              <i class="uil uil-search"></i>
+              <input type="text" placeholder="Search here..." [(ngModel)]="searchQuery"
+                     (ngModelChange)="filterProducts()"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price Sorting Options -->
+        <div class="mb-2">
+          <label for="price-sort">Sort by Price:</label>
+          <select id="price-sort" class="form-control" (change)="onSortChange($event)">
+            <option value="default">Default</option>
+            <option (click)="toggleSidebar()" value="low-to-high">Price: Low to High</option>
+            <option (click)="toggleSidebar()" value="high-to-low">Price: High to Low</option>
+          </select>
+        </div>
+
+        <!-- Sort By Section -->
+        <div class="sort-by-section mb-2">
+          <label for="sortby-date">Sort by date :</label>
+          <select id="sortby-date" class="form-control" (change)="sortByDate($event)">
+            <option (change)="toggleSidebar()" value="newest">Newest First</option>
+            <option (change)="toggleSidebar()" value="oldest">Oldest First</option>
+          </select>
+        </div>
+
+        <!-- Subcategory Filter Section -->
+        <div class="subcategory-filter mb-4">
+          <h6>Filter By Subcategory</h6>
+          <div *ngFor="let subcategory of subCategories">
+            <label>
+              <input
+                type="checkbox"
+                [value]="subcategory.id"
+                (change)="onSubcategoryChange($event)"
+              />
+              {{ subcategory.name }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <div [ngClass]="{'col-md-12': !isSidebarOpen, 'col-md-9 col-lg-10': isSidebarOpen}">
+
+      <!-- Product List Section -->
+      <div class="row">
+        <div *ngIf="filteredProducts.length > 0; else noProducts">
+          <div *ngFor="let product of filteredProducts | paginate: { itemsPerPage: 15, currentPage: p }"
+               class="col-12 mb-1">
+            <div class="row no-gutters">
+              <div class="col-md-3">
+                <a [routerLink]="'/user/product/' + product.id">
+                  <img
+                    [src]="product.images && product.images.length > 0
+                        ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + product.images[0].url
+                        : 'path/to/default-image.jpg'"
+                    class="card-img img-fluid p-2"
+                    alt="{{ product.name }}"
+                  />
+                </a>
+              </div>
+              <div class="col-md-9">
+                <a [routerLink]="['/user/product/', product.id]">
+                  <div class="card-body">
+                    <h5 class="card-title truncate-multiline" matTooltip="{{product.name}}">{{ product.name }}</h5>
+                    <p class="card-text text-muted truncate-multiline">{{ product.description }}</p>
+                    <div class="price-and-rating">
+                      <p>MRP :<span class="text-decoration-line-through"> {{ product.price | currency:'INR' }}</span>
+                      </p>
+                      <p class="text-success">Discount : -{{ product.discount }}%
+                        ({{ (product.price) - (product.price - (product.price * (product.discount / 100))) |currency:'INR' }}
+                        Off)</p>
+                      <span class="rating">
+                          <!-- Full Stars -->
+                          <i class="fa fa-star static-star" *ngFor="let star of getStars(product.avgRating)"></i>
+                        <!-- Half Star -->
+                          <i class="fa fa-star-half-alt static-star" *ngIf="getHalfStar(product.avgRating)"></i>
+                        {{ product.avgRating }}/5 <span class="text-muted">({{ product.reviewsAndRatings.length }}
+                        reviews)</span>
+                        </span>
+                    </div>
+                    <h6
+                      class="product-price text-success">{{ product.price - (product.price * (product.discount / 100)) | currency:'INR' }}</h6>
+                  </div>
+                </a>
+              </div>
+              <div class=" d-flex align-items-end justify-content-end">
+                <button *ngIf="!product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                        (click)="addToCart(product)">Add to Cart
+                </button>
+                <button *ngIf="product.isAvailable.exists && product.stockQuantity > 2" class="glow-on-hover"
+                        [routerLink]="['/user', user.id]">Go To Cart
+                </button>
+                <button *ngIf="product.stockQuantity <= 2" class="btn btn-outline-danger disabled out-of-stock m-3">Out
+                  Of Stock
+                </button>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+
+        <ng-template #noProducts>
+          <div class="col-12 d-flex flex-column align-items-center justify-content-center text-center">
+            <img
+              src="https://img.freepik.com/free-vector/hand-drawn-no-data-concept_52683-127823.jpg?w=1060&t=st=1725119528~exp=1725120128~hmac=bc235ba7f72d53221f5880c08d955f12d367c5c4549412aac99606c51f2677b1"
+              alt="No Products Available"
+              style="height: 500px; width: auto; max-width: 100%;"
+            />
+            <p class="text-muted mt-3">No products available.</p>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- Pagination Controls -->
+      <div *ngIf="filteredProducts.length > 0" class="row mt-4">
+        <div class="col-12 d-flex justify-content-end">
+          <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

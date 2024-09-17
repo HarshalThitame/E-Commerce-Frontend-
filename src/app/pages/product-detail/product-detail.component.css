@@ -1,0 +1,223 @@
+/* Responsive Layout */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Smaller font size for tablets and mobile devices */
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  h6 {
+    font-size: 1.125em;
+  }
+
+  p {
+    font-size: 0.875em;
+  }
+
+  .review-card {
+    font-size: 0.75em;
+  }
+
+  .average-rating, .total-reviews {
+    font-size: 0.75em;
+  }
+  .sticky-part {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .scrollable-part {
+    height: auto;
+    overflow-y: auto;
+  }
+}
+
+.sticky-part {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.scrollable-part {
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+img {
+  display: block;
+  object-fit: contain;
+}
+
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-image-box {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.thumbnail-images {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.thumbnail-images::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.thumbnail-image {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  object-fit: contain;
+  border: 2px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail-image:hover {
+  border-color: #000;
+}
+
+.ratings-reviews {
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.static-star {
+  color: #ffce00;
+  font-size: 18px;
+}
+
+.average-rating {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.total-reviews {
+  color: #777;
+  font-size: 14px;
+}
+
+.review-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.review-date {
+  color: #777;
+  font-size: 12px;
+}
+
+.review-body {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.full-width-button {
+  width: 100%;
+}
+
+.star-rating .fa-star {
+  font-size: 1.5em;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.star-rating .fa-star.checked {
+  color: #ffce00;
+}
+
+.card {
+  border-radius: 15px;
+}
+
+.card-header {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.form-control {
+  border-radius: 10px;
+}
+
+.alert {
+  border-radius: 10px;
+}
+
+.stars {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc; /* Default color for stars */
+  transition: color 0.3s;
+}
+
+.star-selected {
+  color: #ffce00 !important;
+}
+
+/* Wishlist Icon Styling */
+.wishlist-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ddd; /* Default color */
+  transition: color 0.3s;
+}
+
+.wishlist-icon.added {
+  color: #f00; /* Color when added to wishlist */
+}
+
+.wishlist-icon i {
+  pointer-events: none;
+}

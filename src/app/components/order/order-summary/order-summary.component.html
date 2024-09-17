@@ -1,0 +1,40 @@
+<h4 class="card-title">Order Summary</h4>
+<div class="">
+  <div class="col-lg-12">
+    <div class="card mb-3 shadow-lg" *ngFor="let item of cartItems">
+      <div class="row g-0">
+        <div class="col-md-3">
+          <img
+            [src]="item.product.images && item.product.images.length > 0
+            ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + item.product.images[0].url
+            : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+            class="card-img-top product-image mt-2"
+            alt="{{ item.product.name }}">
+        </div>
+        <div class="col-md-9">
+          <div class="card-body">
+            <h6 class="card-title">
+              <a [href]="'user/product/' + item.product.id" [routerLink]="['/user/product', item.product.id]" class="h6">
+                {{item.product.name}}
+              </a>
+            </h6>
+            <p>MRP :<span class="text-decoration-line-through"> {{item.product.price | currency:'INR'}}</span></p>
+            <p class="text-success">-{{item.product.discount}}% ({{(item.product.price)-(item.product.price - (item.product.price * (item.product.discount/100))) |currency:'INR'}} Off)</p>
+            <p class="product-price">{{ item.product.price - (item.product.price * (item.product.discount/100)) | currency:'INR' }}</p>
+            <p>Quantity : {{item.quantity}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+<!--              <div class="input-group" style="width: 120px;">-->
+<!--                <button class="btn btn-outline-secondary" type="button" (click)="decreaseQuantity(item)">-</button>-->
+<!--                <input type="text" class="form-control text-center" value="{{item.quantity}}" readonly>-->
+<!--                <button class="btn btn-outline-secondary" type="button" (click)="increaseQuantity(item)">+</button>-->
+<!--              </div>-->
+<!--              <button class="btn btn-danger btn-sm" (click)="removeItem(item)">Remove</button>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button [routerLink]="['/user/']+user.id" class="btn btn-outline-info"><i class="fa fa-cart-plus"></i></button>
+  </div>
+
+</div>

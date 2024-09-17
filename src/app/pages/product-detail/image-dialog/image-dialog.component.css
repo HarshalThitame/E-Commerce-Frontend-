@@ -1,0 +1,29 @@
+.dialog-container {
+  text-align: center;
+}
+
+.dialog-image {
+ height: 80%;
+  width: 80%;
+  object-fit: contain;
+}
+
+.nav-button {
+  margin: 10px;
+}
+.thumbnail-image {
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+  object-fit: contain;
+  border: 2px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail-images {
+  width: 100%;
+  gap: 10px;
+}
+.thumbnail-images::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
