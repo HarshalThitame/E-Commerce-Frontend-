@@ -1,0 +1,78 @@
+<app-seller-navbar></app-seller-navbar>
+<div class="seller-dashboard-container">
+  <!-- Sidebar and Main Content -->
+  <div class="seller-content">
+    <app-seller-sidenav></app-seller-sidenav>
+
+    <div class="container-fluid mt-4">
+      <h4>Analytics</h4>
+      <div class="row">
+        <!-- Row for Charts -->
+        <div class="row">
+          <!-- Category-wise Sales -->
+          <div class="col-md-6 mb-4">
+            <div class="card shadow-lg">
+              <div class="card-body">
+                <h6 class="card-title text-center">Category-wise Sales</h6>
+                <canvas *ngIf="extractCategorySalesData().data.length > 0" id="categorySalesChart"></canvas>
+                <div *ngIf="extractCategorySalesData().data.length == 0" class="">
+                  <img
+                    src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?t=st=1726070383~exp=1726073983~hmac=4e58a7f2ef6fbb837402d69b112f4bc6efcf5e8124916c0c7bc61ceac5d0150d&w=740"
+                    alt="Data missing">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Status Distribution -->
+          <div class="col-md-6 mb-4">
+            <div class="card shadow-lg">
+              <div class="card-body">
+                <h6 class="card-title text-center">Order Status Distribution</h6>
+                <canvas *ngIf="extractOrderStatusData().data.length>0" id="orderStatusChart"></canvas>
+                <div *ngIf="extractOrderStatusData().data.length == 0" class="">
+                  <img
+                    src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?t=st=1726070383~exp=1726073983~hmac=4e58a7f2ef6fbb837402d69b112f4bc6efcf5e8124916c0c7bc61ceac5d0150d&w=740"
+                    alt="Data missing">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row for Sales vs. Returns and Top Selling Products -->
+        <div class="row">
+          <!-- Sales vs. Returns -->
+          <div class="col-md-6 mb-4">
+            <div class="card shadow-lg">
+              <div class="card-body">
+                <h6 class="card-title text-center">Sales vs. Returns</h6>
+                <canvas *ngIf="extractCategorySalesData().data.length > 0" id="salesReturnsChart"></canvas>
+                <div *ngIf="extractCategorySalesData().data.length == 0" class="">
+                  <img
+                    src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?t=st=1726070383~exp=1726073983~hmac=4e58a7f2ef6fbb837402d69b112f4bc6efcf5e8124916c0c7bc61ceac5d0150d&w=740"
+                    alt="Data missing">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Selling Products (Bar Chart) -->
+          <div class="col-md-6 mb-4">
+            <div class="card shadow-lg">
+              <div class="card-body">
+                <h6 class="card-title text-center">Top Selling Products</h6>
+                <canvas *ngIf="extractTopSellingProductsData().data.length >0" id="topSellingProductsChart"></canvas>
+                <div *ngIf="extractTopSellingProductsData().data.length == 0" class="">
+                  <img
+                    src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?t=st=1726070383~exp=1726073983~hmac=4e58a7f2ef6fbb837402d69b112f4bc6efcf5e8124916c0c7bc61ceac5d0150d&w=740"
+                    alt="Data missing">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

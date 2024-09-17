@@ -1,0 +1,33 @@
+/* Custom styling for login card */
+.card {
+  background-color: #fff;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #ff705d;
+  border-color: #ff705d;
+  border-radius: 25px;
+}
+
+.btn-primary:hover {
+  background-color: #e66754;
+  border-color: #e66754;
+}
+
+.form-control {
+  border-radius: 10px;
+}
+
+p.text-muted {
+  font-size: 12px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.logo-image{
+  max-height: 100px;
+  object-fit: contain;
+}

@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="sidebarMenu">
+    <aside class="seller-sidebar">
+      <button class="btn btn-light d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Close sidebar">
+        <i class="fas fa-times"></i>
+      </button>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" [routerLink]="['/seller/dashboard']" href="#">
+            <i class="fas fa-tachometer-alt"></i> &nbsp; Dashboard Overview
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="'/seller/orders'">
+            <i class="fas fa-box"></i> &nbsp; Orders
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="'/seller/products'">
+            <i class="fas fa-cubes"></i> &nbsp; Products
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="'/seller/inventory'">
+            <i class="fas fa-archive"></i> &nbsp; Inventory
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="'/seller/analytics'">
+            <i class="fas fa-chart-line"></i> &nbsp; Analytics
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-bullhorn"></i> &nbsp; Promotions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="'/seller'">
+            <i class="fas fa-folder-plus"></i> &nbsp; Add New Product
+          </a>
+        </li>
+      </ul>
+      <!-- Bootstrap Accordion -->
+      <div class="accordion mt-3" id="accordionExample">
+        <!-- Parent Option: Product Filters -->
+        <div class="accordion-item text-white mb-2">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Product Filters
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body text-white">
+              <!-- List Group -->
+              <ul class="list-group">
+                <li class="list-group-item text-white border-0">
+                  <i class="fas fa-image"></i> &nbsp;
+                  <a [routerLink]="'/seller/products'" [queryParams]="{ 'NO-IMAGE': 'true' }" class="text-white text-decoration-none">Image Pending</a>
+                </li>
+                <li class="list-group-item text-white border-0">
+                  <i class="fas fa-hourglass-half"></i> &nbsp;
+                  <a [routerLink]="['/seller/orders']" [queryParams]="{ status: 'PENDING' }" class="text-white text-decoration-none">Pending Orders</a>
+                </li>
+                <li class="list-group-item text-white border-0">
+                  <i class="fas fa-cancel"></i> &nbsp;
+                  <a [routerLink]="['/seller/orders']" [queryParams]="{ status: 'CANCELLED' }" class="text-white text-decoration-none">Cancelled Orders</a>
+                </li>
+                <li class="list-group-item text-white border-0">
+                  <i class="fas fa-undo"></i> &nbsp;
+                  <a [routerLink]="['/seller/orders']" [queryParams]="{ status: 'RETURN' }" class="text-white text-decoration-none">Return Orders</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</nav>

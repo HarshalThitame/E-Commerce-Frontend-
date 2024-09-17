@@ -1,0 +1,70 @@
+.seller-dashboard-container {
+}
+
+.seller-header {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.seller-content {
+  display: flex;
+}
+
+.seller-sidebar {
+  width: 250px;
+  background-color: #343a40;
+  min-height: 100vh;
+  padding: 15px;
+}
+
+.seller-sidebar .nav-link {
+  color: #fff;
+  padding: 10px 15px;
+}
+
+.seller-sidebar .nav-link.active {
+  background-color: #007bff;
+  border-radius: 5px;
+}
+
+.seller-main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.metrics .metric-card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor:pointer;
+}
+
+.metrics .metric-card h5 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.metrics .metric-card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.charts .chart-card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.charts .chart-card h5 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}

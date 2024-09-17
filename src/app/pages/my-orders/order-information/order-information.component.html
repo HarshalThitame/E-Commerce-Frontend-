@@ -1,0 +1,120 @@
+<app-navbar></app-navbar>
+<div class="container-fluid order-details-page mt-4">
+
+  <!-- Order ID and Status -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h6>Order ID: {{orderDetails.id}}</h6>
+      <p>Placed on: {{orderDetails.createdAt | date: 'dd MMM, yyyy'}}</p>
+      <p *ngIf="orderDetails.order.status != 'CANCELLED'" class="text-success">{{orderDetails.order.status}}</p>
+      <p *ngIf="orderDetails.order.status == 'CANCELLED'" class="text-danger">{{orderDetails.order.status}}
+        <br>Your order for this product has been cancelled. To purchase it again, simply add it to your cart and place a new order.
+      </p>
+    </div>
+  </div>
+</div>
+  <!-- Progress Bar -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="progress-container mb-1">
+        <div class="progress">
+          <div
+            class="progress-bar"
+            [ngClass]="{
+              'bg-primary': !isCancelled() && currentStatus === 1,
+              'bg-info': !isCancelled() && currentStatus === 2,
+              'bg-warning': !isCancelled() && currentStatus === 3,
+              'bg-success': !isCancelled() && currentStatus === 4,
+              'bg-danger': isCancelled()
+            }"
+            [style.width.%]="isCancelled() ? 100 : (currentStatus / 4) * 100"
+            role="progressbar"
+            [attr.aria-valuenow]="currentStatus"
+            aria-valuemin="1"
+            aria-valuemax="5"
+          >
+            <span class="progress-label">{{ statusLabels[currentStatus - 1] }}</span>
+          </div>
+        </div>
+        <div class="status-labels">
+          <span class="status-label text-start" [ngClass]="{ 'active': currentStatus === 1 || isCancelled() }">PENDING</span>
+          <span *ngIf="!isCancelled()" class="status-label text-start" [ngClass]="{ 'active': currentStatus === 2 }">PROCESSING</span>
+          <span *ngIf="!isCancelled()" class="status-label text-end" [ngClass]="{ 'active': currentStatus === 3 }">SHIPPED</span>
+          <span *ngIf="!isCancelled()" class="status-label text-end" [ngClass]="{ 'active': currentStatus === 4 }">DELIVERED</span>
+          <span *ngIf="isCancelled()" class="status-label text-end" [ngClass]="{ 'active': isCancelled() }">CANCELLED</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Order Details -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Left Sidebar with Order Summary -->
+    <div class="col-lg-8 col-md-12 mb-4">
+      <div class="order-summary p-3 border rounded">
+        <h5>Order Summary</h5>
+        <hr>
+        <a href="#" [routerLink]="'/user/product/' + orderDetails.product.id">
+          <div class="row order-item d-flex mb-3">
+            <div class="col-4 d-flex justify-content-center align-items-center">
+              <img [src]="orderDetails.product.images && orderDetails.product.images.length > 0
+                ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + orderDetails.product.images[0].url
+                : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+                   alt="{{ orderDetails.product.name }}" class="product-image rounded">
+            </div>
+            <div class="col-8">
+              <p><strong>{{orderDetails.product.name}}</strong></p>
+              <p>{{orderDetails.product.price | currency:'INR'}}</p>
+              <p>Quantity: {{orderDetails.quantity}}</p>
+              <p>Seller: {{orderDetails.product.seller.businessName}}</p>
+              <p>Returnable until: {{returnableDate | date: 'dd MMM, yyyy'}}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Sidebar with Payment and Shipping Details -->
+    <div class="col-lg-4 col-md-12">
+      <div class="shipping-details p-3 border rounded mb-4">
+        <h5>Shipping Address</h5>
+        <p>{{shippingAddressDetails.firstName}} {{shippingAddressDetails.lastName}}</p>
+        <p>{{shippingAddressDetails.addressLine1}},
+          {{shippingAddressDetails.addressLine2}},
+          {{shippingAddressDetails.city}},
+          {{shippingAddressDetails.state}}
+          <br>
+          {{shippingAddressDetails.country}}
+          <br>
+          {{shippingAddressDetails.zipCode}}
+        </p>
+      </div>
+
+      <div class="payment-details p-3 border rounded">
+        <h5>Payment Information</h5>
+        <p>Payment Method: {{paymentDetails.paymentMethod | uppercase}}</p>
+        <p>Total Amount: {{orderDetails.price * orderDetails.quantity | currency:'INR'}}</p>
+        <p *ngIf="orderDetails.order.status != 'CANCELLED'">Payment Status:
+          <span *ngIf="paymentDetails.paymentStatus == 'PENDING'" class="text-warning">{{paymentDetails.paymentStatus}}</span>
+          <span *ngIf="paymentDetails.paymentStatus == 'FAILED'" class="text-danger">{{paymentDetails.paymentStatus}}</span>
+          <span *ngIf="paymentDetails.paymentStatus == 'COMPLETED'" class="text-success">{{paymentDetails.paymentStatus}}</span>
+        </p>
+        <p *ngIf="orderDetails.order.status == 'CANCELLED'" class="text-success">Payment Status: REFUNDED</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+  <!-- Download Invoice Button -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-right">
+        <a href="#" class="btn btn-outline-primary">Download Invoice</a>
+      </div>
+    </div>
+
+  </div>
+</div>

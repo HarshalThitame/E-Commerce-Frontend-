@@ -1,0 +1,59 @@
+/* Main dialog container styling */
+.mat-dialog-container {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ffffff; /* White background for the dialog */
+}
+
+/* Header styling */
+.mat-dialog-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #6200ea; /* Primary color */
+  margin-bottom: 20px;
+}
+
+/* Form field styling */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-form-field .mat-form-field-label {
+  color: #6200ea; /* Primary color for labels */
+}
+
+mat-form-field.mat-focused .mat-form-field-label {
+  color: #3700b3; /* Darker primary color when focused */
+}
+
+mat-form-field .mat-form-field-underline {
+  background-color: #6200ea; /* Primary color for underline */
+}
+
+mat-form-field .mat-form-field-ripple {
+  background-color: #3700b3; /* Darker primary color for ripple effect */
+}
+
+/* Dialog actions styling */
+.mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* Action buttons styling */
+button.mat-button {
+  color: #6200ea; /* Primary color for buttons */
+}
+
+button.mat-raised-button {
+  background-color: #6200ea; /* Primary color for raised button */
+  color: white;
+  margin-left: 8px;
+}
+
+/* Additional styling for error messages, if needed */
+.mat-form-field .mat-form-field-subscript {
+  color: #d32f2f; /* Error color for validation messages */
+}

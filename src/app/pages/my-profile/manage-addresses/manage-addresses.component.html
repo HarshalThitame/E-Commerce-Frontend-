@@ -1,0 +1,31 @@
+<div class="saved-addresses-container">
+  <mat-card class="addresses-card">
+    <mat-card-header>
+      <mat-card-title>Saved Addresses</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="addresses-list">
+        <mat-list>
+          <mat-list-item *ngFor="let address of addresses" class="address-item">
+            <div matLine class="address-details">
+              <p><mat-icon>share_location</mat-icon><strong>  {{address.firstName}} {{address.lastName}}</strong></p>
+              <p>{{ address.addressLine1 }}, {{ address.addressLine2 }}</p>
+              <p>{{ address.city }}, {{ address.state }} - {{ address.zipCode }}</p>
+              <p>{{ address.country }}</p>
+            </div>
+            <div matLine class="actions">
+              <button mat-icon-button (click)="editAddress(address)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteAddress(address.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <button mat-raised-button color="primary" class="add-address-button" (click)="addNewAddress()">Add New Address</button>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,52 @@
+<app-navbar/>
+<div class="container-fluid d-flex align-items-center justify-content-center">
+  <div class="row">
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <div class="card shadow-lg p-4" style="border-radius: 15px; width: 80%;">
+        <div class="text-center mb-4">
+          <img [src]="'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/Logo.png'" class="logo-image" alt="logo"/>
+        </div>
+        <h2 class="mb-4">Sign in</h2>
+
+        <!-- Bind the form to Angular's form group -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="test@gmail.com">
+            <!-- Show error message if email is invalid -->
+            <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" class="text-danger">
+              Please enter a valid email.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="********">
+            <!-- Show error message if password is invalid -->
+            <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="text-danger">
+              Password must be at least 6 characters.
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mb-4">
+            <a href="#" [routerLink]="'/forgot-password'" class="text-muted">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">SIGN IN</button>
+        </form>
+
+        <div class="text-center mt-4">
+          <p class="text-muted">I don't have an account? <a href="#" [routerLink]="['/signup']" class="text-danger">Sign up</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 d-none d-md-block">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <img
+          src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?t=st=1725713101~exp=1725716701~hmac=b42a00c85a4362ed64d3a099ad4e2364a7478985fd6e694802930d732704c601&w=740"
+             alt="Shopping illustration" class="img-fluid disabled-click" style="max-height: 100%;">
+      </div>
+    </div>
+  </div>
+</div>

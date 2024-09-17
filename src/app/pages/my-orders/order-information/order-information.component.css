@@ -1,0 +1,165 @@
+/* General Styles */
+.order-details-page {
+  color: #333;
+}
+
+h4, h5 {
+  color: #212121;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.order-summary h5, .shipping-details h5, .payment-details h5 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Font Sizes */
+h4, h5 {
+  font-size: 1.25rem; /* Default size */
+}
+
+.order-item p {
+  font-size: 1rem; /* Default size */
+}
+
+.btn-outline-primary {
+  font-size: 1rem; /* Default size */
+}
+
+/* Progress Bar Styles */
+.progress-container {
+  position: relative;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.progress {
+  height: 30px;
+  border-radius: 15px; /* Rounded corners */
+  background: #e9ecef; /* Light grey background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  line-height: 30px; /* Align text vertically */
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 15px; /* Match the rounded corners */
+  background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(0,0,0,0.2)); /* Gradient background */
+  transition: width 0.6s ease-in-out, background 0.4s ease-in-out; /* Smooth transitions */
+}
+
+.bg-primary {
+  background: linear-gradient(45deg, #007bff, #0056b3) !important; /* Blue gradient */
+}
+
+.bg-info {
+  background: linear-gradient(45deg, #17a2b8, #117a8b) !important; /* Teal gradient */
+}
+
+.bg-warning {
+  background: linear-gradient(45deg, #ffc107, #e0a800) !important; /* Yellow gradient */
+}
+
+.bg-success {
+  background: linear-gradient(45deg, #28a745, #1e7e34) !important; /* Green gradient */
+}
+
+.progress-label {
+  position: relative;
+  z-index: 1; /* Ensure label is above the gradient */
+}
+
+.status-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.status-label {
+  width: 20%;
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .order-summary, .shipping-details, .payment-details {
+    padding: 1rem;
+  }
+
+  .product-image {
+    max-height: 15vh;
+  }
+
+  .btn-outline-primary {
+    font-size: 0.875rem;
+  }
+
+  h5 {
+    font-size: 1.125rem;
+  }
+
+  .order-item p ,span{
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .status-labels {
+    flex-direction: column;
+  }
+
+  .status-label {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .order-summary, .shipping-details, .payment-details {
+    margin-bottom: 1rem;
+  }
+
+  .btn-outline-primary {
+    font-size: 0.75rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  .order-item p ,span{
+    font-size: 0.75rem;
+  }
+  .status-labels{
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .order-summary, .shipping-details, .payment-details {
+    padding: 0.5rem;
+  }
+
+  .btn-outline-primary {
+    font-size: 0.75rem;
+  }
+
+  h5,h6 {
+    font-size: 0.875rem;
+  }
+
+  .order-item p span{
+    font-size: 0.625rem;
+  }
+  .status-labels{
+    display: none;
+  }
+}

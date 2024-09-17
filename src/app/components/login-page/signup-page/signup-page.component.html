@@ -1,0 +1,67 @@
+<app-navbar/>
+<div class="container-fluid d-flex align-items-center justify-content-center">
+  <div class="row w-100">
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <div class="card shadow-lg p-4" style="border-radius: 15px; width: 80%;">
+        <div class="text-center mb-4">
+          <img [src]="'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/Logo.png'" class="logo-image" alt="logo"/>
+        </div>
+        <h2 class="mb-4">Sign Up</h2>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" formControlName="username" class="form-control" id="username" placeholder="Enter username">
+          </div>
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" formControlName="firstName" class="form-control" id="firstName" placeholder="Enter first name">
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control" id="lastName" placeholder="Enter last name">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" formControlName="phone" class="form-control" id="phone" placeholder="Enter phone number">
+          </div>
+          <div class="mb-3">
+            <label for="dateOfBirth" class="form-label">Date of Birth</label>
+            <input type="date" formControlName="dateOfBirth" class="form-control" id="dateOfBirth">
+          </div>
+          <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select formControlName="gender" class="form-control" id="gender">
+              <option value="" disabled>Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" formControlName="password" class="form-control" id="password" placeholder="Enter password">
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm password">
+          </div>
+          <div class="d-flex justify-content-between mb-4">
+            <a href="#" [routerLink]="['/login']" class="text-muted">Already have an account? Sign In</a>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" [disabled]="signupForm.invalid">SIGN UP</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-6 d-none d-md-block">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <img [src]="'https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-132.jpg?w=740&t=st=1725713101~exp=1725716701~hmac=99a2d64977ac9c17ae6f00ea6ad7a5eb08d3d7271c5a021c1b2543beaa125e3f'"
+             alt="Sign-up illustration" class="img-fluid disabled-click" style="max-height: 100%;">
+      </div>
+    </div>
+  </div>
+</div>

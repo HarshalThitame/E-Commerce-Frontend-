@@ -1,0 +1,9 @@
+.more-button {
+  margin-left: auto; /* Pushes the button to the right */
+  font-size: 14px; /* Adjusts the font size of the button */
+  color: #1976d2; /* Optional: Changes the button color */
+}
+a{
+  text-decoration: none;
+  color: #000000;
+}

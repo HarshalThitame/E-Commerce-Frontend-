@@ -1,0 +1,47 @@
+<app-seller-navbar></app-seller-navbar>
+<div class="seller-dashboard-container">
+  <!-- Sidebar and Main Content -->
+  <div class="seller-content">
+    <app-seller-sidenav></app-seller-sidenav>
+
+    <div class="" *ngIf="filteredOrders.length>0 ">
+      <main class="p-4">
+        <h2 class="mb-4">Orders</h2>
+        <!-- Filters and Search -->
+        <div class="d-flex justify-content-between mb-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select (selectionChange)="filterOrders()" [(ngModel)]="selectedStatus">
+              <mat-option [value]="''">All Statuses</mat-option>
+              <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Orders Card Grid -->
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-2" *ngFor="let order of filteredOrders | paginate: { itemsPerPage: 9, currentPage: p }">
+            <div class="card shadow-lg">
+              <div class="card-body">
+                <h5 class="card-title">Order ID: #{{order.id}}</h5>
+                <p class="card-text">Order Date: <strong>{{order.createdAt | date:'dd MMM yyyy'}}</strong></p>
+                <p class="card-text">Total Amount: <strong>{{order.price * order.quantity | currency:'INR'}}</strong></p>
+                <p class="card-text">Status: <strong>{{order.order.status}}</strong></p>
+                <a href="#" [routerLink]="['/seller/order/order-details/', order.id]" class="btn btn-primary">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Pagination Controls -->
+        <div class="row">
+          <div class="col-12 d-flex justify-content-end mt-5">
+            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div *ngIf="filteredOrders.length == 0" class="d-flex justify-content-center align-items-center">
+      <img src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?t=st=1725898734~exp=1725902334~hmac=3a729aae750e9e49effe54f181565099b335162efba11a4ce0db94cd97014a79&w=740" alt="No Data">
+    </div>
+  </div>
+</div>

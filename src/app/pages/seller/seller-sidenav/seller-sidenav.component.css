@@ -1,0 +1,58 @@
+
+.navbar{
+  position: sticky;
+  top: 72px;
+  padding: 0 !important;
+  z-index: 500; /* Ensure it is behind the navbar */
+
+}
+.seller-sidebar {
+  width: 250px;
+  background-color: #343a40;
+  min-height: calc(100vh - 72px);
+}
+
+.seller-sidebar .nav-link {
+  color: #fff;
+  padding: 10px 15px;
+}
+
+.seller-sidebar .nav-link.active {
+  background-color: #007bff;
+  border-radius: 5px;
+}
+/* Hide sidebar on small screens */
+
+
+
+.accordion-item{
+  background: #343a40;
+  border: none;
+}
+.accordion-header{
+  background: #343a40;
+ }
+.accordion-button {
+  background-color: #343a40;
+  color: white;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #343a40; /* Slightly lighter black when expanded */
+}
+
+.accordion-body {
+  background-color: #343a40;
+  color: white;
+}
+
+.list-group-item {
+  background-color: #343a40;
+  color: white;
+}
+
+.list-group-item:hover {
+  background-color: #333; /* Darker shade for hover effect */
+}
+
+

@@ -1,0 +1,48 @@
+<mat-card-header>
+  <mat-card-title>Suggested...</mat-card-title>
+  <button mat-button class="more-button" *ngIf="products.length > 0"
+          [routerLink]="'user/allproducts/category/'+'Fashion'">View All
+  </button>
+</mat-card-header>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="products.length > 0; else noProducts">
+        <!-- Products list -->
+          <div *ngFor="let product of products" class="col-md-2">
+            <div class="card m-2">
+              <a href="#" [routerLink]="'user/product/' + product.id">
+                <img
+                  [src]="product.images && product.images.length > 0
+           ? 'https://harshal-ecom.s3.eu-north-1.amazonaws.com/images/' + product.images[0].url
+           : 'https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg'"
+                  class="card-img img-fluid p-2"
+                  alt="{{ product.name }}">
+                <div class="card-body">
+                  <h6 class="card-title truncate-multiline">
+                    {{ product.name }}
+                  </h6>
+                  <p class="card-text"> {{ product.price | currency:'INR' }}</p>
+                </div>
+              </a>
+              <button *ngIf="!product.isAvailable.exists" class="glow-on-hover" (click)="addToCart(product)">Add to
+                Cart
+              </button>
+
+              <button *ngIf="product.isAvailable.exists" class="glow-on-hover" [routerLink]="['/user', user.id]">Go To
+                Cart
+              </button>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+    <!-- No products available -->
+    <ng-template #noProducts>
+      <div class="text-center">
+        <p>No products available in this category.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

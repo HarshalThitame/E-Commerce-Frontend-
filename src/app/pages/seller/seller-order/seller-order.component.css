@@ -1,0 +1,60 @@
+/* Add this to your component's CSS file or a global stylesheet */
+.seller-dashboard-container {
+  display: flex;
+}
+
+.seller-content {
+  display: flex;
+}
+
+.app-seller-sidenav {
+  width: 250px;
+  /* Adjust as needed */
+}
+
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.row > .col-md-6,
+.row > .col-lg-4 {
+  margin-bottom: 20px;
+
+}
+.card{
+  width: 100%;
+}
+
+img{
+  max-width: 100%;
+}
+
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  flex: 1; /* Take up all remaining space */
+  width: 100%;
+}

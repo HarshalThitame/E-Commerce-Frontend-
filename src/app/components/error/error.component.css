@@ -1,0 +1,37 @@
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+.error-content {
+  max-width: 500px;
+  padding: 20px;
+}
+
+.error-code {
+  font-size: 96px;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.error-message {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.btn {
+  margin-top: 20px;
+}
+.btn-secondary {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-secondary i {
+  margin-right: 8px; /* Space between icon and text */
+}

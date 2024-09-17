@@ -1,0 +1,29 @@
+.seller-dashboard-container {
+  display: flex;
+}
+
+.seller-content {
+  display: flex;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+canvas {
+  max-height: 400px;
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+img{
+  width: 100%;
+  object-fit: contain;
+}

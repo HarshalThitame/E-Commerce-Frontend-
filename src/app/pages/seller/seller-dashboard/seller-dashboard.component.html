@@ -1,0 +1,51 @@
+<app-seller-navbar />
+<div class="seller-dashboard-container">
+
+  <!-- Sidebar and Main Content -->
+  <div class="seller-content">
+    <app-seller-sidenav />
+
+    <main class="seller-main-content">
+      <section class="metrics">
+        <div class="row">
+          <div class="col-md-3" [routerLink]="['/seller/orders']">
+            <div class="metric-card">
+              <h5>Total Sales</h5>
+              <p>{{ totalSale | currency:'INR' }}</p>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="metric-card">
+              <h5>Total Orders</h5>
+              <p>{{ orderItems.length }}</p>
+            </div>
+          </div>
+          <div class="col-md-3" [routerLink]="['/seller/orders']" [queryParams]="{ status: 'PENDING' }">
+            <div class="metric-card">
+              <h5>Pending Shipments</h5>
+              <p>{{ pendingShipment }}</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="metric-card">
+              <h5>Returns</h5>
+              <p>5</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="charts">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="chart-card">
+              <h5>Sales Performance</h5>
+              <canvas id="salesChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
